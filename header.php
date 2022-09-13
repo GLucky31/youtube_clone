@@ -20,7 +20,7 @@
     <?php
     if(!isset($logged)){
         echo '<a href=login.php>Login</a><br>';
-        echo '<a href=register.php>Register</a>';
+        echo '<a href=registration.php>Register</a>';
     }
     else{
         echo '<a href=logout.php>Logout</a>';
