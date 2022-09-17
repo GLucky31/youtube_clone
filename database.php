@@ -1,7 +1,7 @@
 <?php
 
 $host = '127.0.0.1';
-$db   = 'tube_clone';
+$db   = 'cthulhu_tube_clone';
 $user = 'root';
 $pass = '';
 $charset = 'utf8mb4';
