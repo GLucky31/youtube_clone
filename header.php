@@ -1,4 +1,4 @@
-
+<?php session_start();?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -26,6 +26,10 @@
 
 <body class="dark">
 <!-- logo, menu, search, avatar -->
+<?php if(isset($_SESSION['id_user']))
+{
+    echo "<h1>Logged in</h1>";
+}?>
 <div class="container-fluid">
     <div class="row">
         <div class="btn-color-toggle">
@@ -48,31 +52,31 @@
                             <li class="color-active">
                                 <a href="#">Pages</a>
                                 <ul>
-                                    <li><a href="index.html">Home Page</a></li>
-                                    <li><a href="single-video.html">Single Video Page</a></li>
-                                    <li><a href="single-video-youtube.html">Single Video Youtube Embedded Page</a></li>
-                                    <li><a href="single-video-vimeo.html">Single Video Vimeo Embedded Page</a></li>
-                                    <li><a href="upload.html">Upload Video Page</a></li>
-                                    <li><a href="upload-edit.html">Upload Video Edit Page</a></li>
-                                    <li><a href="search.html">Searched Videos Page</a></li>
-                                    <li><a href="channel.html">Single Channel Page</a></li>
-                                    <li><a href="channels.html">Channels Page</a></li>
-                                    <li><a href="single-video-tabs.html">Single Videos Page With Tabs</a></li>
-                                    <li><a href="single-video-playlist.html">Single Videos Page With Playlist</a></li>
-                                    <li><a href="history.html">History Page</a></li>
-                                    <li><a href="categories.html">Browse Categories Page</a></li>
-                                    <li><a href="categories_side_menu.html">Browse Categories Side Menu Page</a></li>
-                                    <li><a href="subscription.html">Subscription Page</a></li>
-                                    <li><a href="login.html">Login Page</a></li>
-                                    <li><a href="signup.html">Signup Page</a></li>
+                                    <li><a href="index.php">Home Page</a></li>
+                                    <li><a href="single-video.php">Single Video Page</a></li>
+                                    <li><a href="single-video-youtube.php">Single Video Youtube Embedded Page</a></li>
+                                    <li><a href="single-video-vimeo.php">Single Video Vimeo Embedded Page</a></li>
+                                    <li><a href="upload.php">Upload Video Page</a></li>
+                                    <li><a href="upload-edit.php">Upload Video Edit Page</a></li>
+                                    <li><a href="search.php">Searched Videos Page</a></li>
+                                    <li><a href="channel.php">Single Channel Page</a></li>
+                                    <li><a href="channels.php">Channels Page</a></li>
+                                    <li><a href="single-video-tabs.php">Single Videos Page With Tabs</a></li>
+                                    <li><a href="single-video-playlist.php">Single Videos Page With Playlist</a></li>
+                                    <li><a href="history.php">History Page</a></li>
+                                    <li><a href="categories.php">Browse Categories Page</a></li>
+                                    <li><a href="categories_side_menu.php">Browse Categories Side Menu Page</a></li>
+                                    <li><a href="subscription.php">Subscription Page</a></li>
+                                    <li><a href="login.php">Login Page</a></li>
+                                    <li><a href="registration.php">Signup Page</a></li>
                                 </ul>
                             </li>
-                            <li><a href="categories.html">Categories</a></li>
-                            <li><a href="channel.html">Channels</a></li>
+                            <li><a href="categories.php">Categories</a></li>
+                            <li><a href="channel.php">Channels</a></li>
                         </ul>
                     </div>
                     <div class="col-lg-6 col-sm-8 col-xs-3">
-                        <form action="search.html" method="post">
+                        <form action="search.php" method="post">
                             <div class="topsearch">
                                 <i class="cv cvicon-cv-cancel topsearch-close"></i>
                                 <div class="input-group">
@@ -104,8 +108,8 @@
                                     <span class="caret"></span>
                                 </button>
                                 <ul class="dropdown-menu">
-                                    <li><a href="login.html">Login</a></li>
-                                    <li><a href="signup.html">Sign up</a></li>
+                                    <li><a href="login.php">Login</a></li>
+                                    <li><a href="registration.php">Sign up</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -113,7 +117,7 @@
                     </div>
                 </div>
                 <div class="hidden-xs">
-                    <a href="upload.html">
+                    <a href="upload.php">
                         <div class="upload-button">
                             <i class="cv cvicon-cv-upload-video"></i>
                         </div>
@@ -128,7 +132,7 @@
 <div class="mobile-menu">
     <div class="mobile-menu-head">
         <a href="#" class="mobile-menu-close"></a>
-        <a class="navbar-brand" href="index.html">
+        <a class="navbar-brand" href="index.php">
             <img src="images/logo.svg" alt="Project name" class="logo" />
             <span>Circle</span>
         </a>
@@ -166,27 +170,27 @@
                         <li class="color-active">
                             <a href="#">Pages <span class="caret"></span></a>
                             <ul>
-                                <li><a href="index.html">Home Page</a></li>
-                                <li><a href="single-video.html">Single Video Page</a></li>
-                                <li><a href="single-video-youtube.html">Single Video Youtube Embedded Page</a></li>
-                                <li><a href="single-video-vimeo.html">Single Video Vimeo Embedded Page</a></li>
-                                <li><a href="upload.html">Upload Video Page</a></li>
-                                <li><a href="upload-edit.html">Upload Video Edit Page</a></li>
-                                <li><a href="search.html">Searched Videos Page</a></li>
-                                <li><a href="channel.html">Single Channel Page</a></li>
-                                <li><a href="channels.html">Channels Page</a></li>
-                                <li><a href="single-video-tabs.html">Single Videos Page With Tabs</a></li>
-                                <li><a href="single-video-playlist.html">Single Videos Page With Playlist</a></li>
-                                <li><a href="history.html">History Page</a></li>
-                                <li><a href="categories.html">Browse Categories Page</a></li>
-                                <li><a href="categories_side_menu.html">Browse Categories Side Menu Page</a></li>
-                                <li><a href="subscription.html">Subscription Page</a></li>
-                                <li><a href="login.html">Login Page</a></li>
-                                <li><a href="signup.html">Signup Page</a></li>
+                                <li><a href="index.php">Home Page</a></li>
+                                <li><a href="single-video.php">Single Video Page</a></li>
+                                <li><a href="single-video-youtube.php">Single Video Youtube Embedded Page</a></li>
+                                <li><a href="single-video-vimeo.php">Single Video Vimeo Embedded Page</a></li>
+                                <li><a href="upload.php">Upload Video Page</a></li>
+                                <li><a href="upload-edit.php">Upload Video Edit Page</a></li>
+                                <li><a href="search.php">Searched Videos Page</a></li>
+                                <li><a href="channel.php">Single Channel Page</a></li>
+                                <li><a href="channels.php">Channels Page</a></li>
+                                <li><a href="single-video-tabs.php">Single Videos Page With Tabs</a></li>
+                                <li><a href="single-video-playlist.php">Single Videos Page With Playlist</a></li>
+                                <li><a href="history.php">History Page</a></li>
+                                <li><a href="categories.php">Browse Categories Page</a></li>
+                                <li><a href="categories_side_menu.php">Browse Categories Side Menu Page</a></li>
+                                <li><a href="subscription.php">Subscription Page</a></li>
+                                <li><a href="login.php">Login Page</a></li>
+                                <li><a href="registration.php">Signup Page</a></li>
                             </ul>
                         </li>
-                        <li><a href="categories.html">Categories</a></li>
-                        <li><a href="channel.html">Channels</a></li>
+                        <li><a href="categories.php">Categories</a></li>
+                        <li><a href="channel.php">Channels</a></li>
                     </ul>
                 </li>
                 <li>
