@@ -2,30 +2,66 @@
 include_once './header.php';
 ?>
 
-<h1>Registracija</h1>
+<div class="container-fluid bg-image">
+    <div class="row">
+        <div class="login-wraper">
+            <div class="hidden-xs">
+                <img src="images/login.jpg" alt="">
+            </div>
+            <div class="banner-text hidden-xs">
+                <div class="line"></div>
+                <div class="b-text">
+                    Watch <span class="color-active">millions<br> of</span> <span class="color-b1">v</span><span class="color-b2">i</span><span class="color-b3">de</span><span class="color-active">os</span> for free.
+                </div>
+                <div class="overtext">
+                    Over 6000 videos uploaded Daily.
+                </div>
+            </div>
+            <div class="login-window">
+                <div class="l-head">
+                    Sign Up for Free
+                </div>
+                <div class="l-form">
+                    <form action="user_insert.php" method="post">
+                    <div class="form-group">
+                            <label for="exampleInputUsername">Username</label>
+                            <input type="text" name='username' class="form-control" id="exampleInputUsername" placeholder="John/Joe Doe">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Email</label>
+                            <input type="email" name='email' class="form-control" id="exampleInputEmail1" placeholder="sample@gmail.com">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Password</label>
+                            <input type="password" name="pass1" class="form-control" id="exampleInputPassword1" placeholder="**********">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword2">Re-type Password</label>
+                            <input type="password" name="pass2" class="form-control" id="exampleInputPassword2" placeholder="**********">
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-7"><button type="submit" class="btn btn-cv1">Sign Up</button></div>
+                            <div class="hidden-xs">
+                                <div class="col-lg-1 ortext">or</div>
+                                <div class="col-lg-4 signuptext"><a href="login.html">Log In</a></div>
+                            </div>
+                        </div>
+                        <div class="row hidden-xs">
+                            <div class="col-lg-12 forgottext">
+                                <a href="#">By clicking "Sign Up" I agree to circle's Terms of Service.</a>
+                            </div>
+                        </div>
+                        <div class="visible-xs text-center mt-30">
+                            <span class="forgottext"><a href="#">Already have an account?</a></span>
+                            <span class="signuptext"><a href="#">Login here</a></span>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-<form action="user_insert.php" method="post">
-    <input type="text" name="first_name" class="form-control mb-4" placeholder="Vnesi ime" required="required" />
-    <input type="text" name="last_name" class="form-control mb-4" placeholder="Vnesi priimek" required="required" />
-    <input type="email" name="email" class="form-control mb-4" placeholder="Vnesi e-pošto" required="required" />
-    <input type="text" name="phone" class="form-control mb-4" placeholder="Vnesi telefon" />
-    <input type="date" name="birthday" class="form-control mb-4" value="2000-01-01" placeholder="Vnesi datum rojstva" />
-    <input type="text" name="address" class="form-control mb-4" placeholder="Vnesi naslov" required="required"/>
-    <select name="city_id" class="form-control mb-4">
-        <?php
-        include_once './database.php';
-        $query = "SELECT * FROM cities ORDER BY title";
-        $stmt = $pdo->prepare($query);
-        $stmt->execute();
-        while ($row = $stmt->fetch()) {
-            echo '<option value="'.$row['id'].'">'.$row['title'].'</option>';
-        }
-        ?>
-    </select>
-    <input type="password" name="pass1" class="form-control mb-4" placeholder="Vnesi geslo" required="required" />
-    <input type="password" name="pass2" class="form-control mb-4" placeholder="Ponovi geslo" required="required" />
-    <input type="submit" value="Shrani" />
-</form>
 
 <?php
 include_once './footer.php';
