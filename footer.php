@@ -69,7 +69,7 @@
 <!-- Placed at the end of the document so the pages load faster -->
 <script src="js/jquery.min.js"></script>
 <script src="bootstrap/js/bootstrap.min.js"></script>
+<script  src="js/vendor/player/johndyer-mediaelement-89793bc/build/mediaelement-and-player.min.js"></script>
 <script src="js/custom.js"></script>
-
 </body>
 </html>

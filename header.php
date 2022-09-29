@@ -1,4 +1,4 @@
-<?php session_start();?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,14 +10,20 @@
     <meta name="author" content="">
     <link rel="icon" href="favicon.png">
 
-    <title>Circle Video | Home Page</title>
+    <title>Circle Video</title>
 
     <!-- Bootstrap core CSS -->
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="js/vendor/rangeSlider/css/ion.rangeSlider.css" rel="stylesheet">
+    <link href="js/vendor/rangeSlider/css/ion.rangeSlider.skinFlat.css" rel="stylesheet">
+
+    <!-- player -->
+    <link rel="stylesheet" href="js/vendor/player/johndyer-mediaelement-89793bc/build/mediaelementplayer.min.css" />
 
     <!-- Theme CSS -->
     <link href="css/style.css" rel="stylesheet">
     <link href="css/font-awesome.min.css" rel="stylesheet">
+    <link href="css/form-awesome.css" rel="stylesheet">
     <link href="css/font-circle-video.css" rel="stylesheet">
 
     <!-- font-family: 'Hind', sans-serif; -->
@@ -26,10 +32,7 @@
 
 <body class="dark">
 <!-- logo, menu, search, avatar -->
-<?php if(isset($_SESSION['id_user']))
-{
-    echo "<h1>Logged in</h1>";
-}?>
+
 <div class="container-fluid">
     <div class="row">
         <div class="btn-color-toggle">
@@ -64,14 +67,13 @@
                                     <li><a href="single-video-tabs.php">Single Videos Page With Tabs</a></li>
                                     <li><a href="single-video-playlist.php">Single Videos Page With Playlist</a></li>
                                     <li><a href="history.php">History Page</a></li>
-                                    <li><a href="categories.php">Browse Categories Page</a></li>
-                                    <li><a href="categories_side_menu.php">Browse Categories Side Menu Page</a></li>
+                          
                                     <li><a href="subscription.php">Subscription Page</a></li>
                                     <li><a href="login.php">Login Page</a></li>
                                     <li><a href="registration.php">Signup Page</a></li>
                                 </ul>
                             </li>
-                            <li><a href="categories.php">Categories</a></li>
+                            
                             <li><a href="channel.php">Channels</a></li>
                         </ul>
                     </div>
@@ -104,12 +106,28 @@
                         <div class="selectuser pull-left">
                             <div class="btn-group pull-right dropdown">
                                 <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                    Bailey
+                                    <?php
+                                    if(isset($_SESSION['id_user']))
+                                    {
+                                        echo $_SESSION['username'];
+                                    }
+                                    else
+                                    {
+                                        echo "User";
+                                    }
+                                    ?>
                                     <span class="caret"></span>
                                 </button>
                                 <ul class="dropdown-menu">
-                                    <li><a href="login.php">Login</a></li>
-                                    <li><a href="registration.php">Sign up</a></li>
+                                    <?php if(isset($_SESSION['id_user']))
+                                    {
+                                        echo "<li><a href='logout.php'>Logout</a></li>";
+                                    }
+                                    else
+                                    {
+                                        echo "<li><a href='login.php'>Login</a></li>
+                                        <li><a href='registration.php'>Sign up</a></li>";
+                                    }?>
                                 </ul>
                             </div>
                         </div>
@@ -182,14 +200,13 @@
                                 <li><a href="single-video-tabs.php">Single Videos Page With Tabs</a></li>
                                 <li><a href="single-video-playlist.php">Single Videos Page With Playlist</a></li>
                                 <li><a href="history.php">History Page</a></li>
-                                <li><a href="categories.php">Browse Categories Page</a></li>
-                                <li><a href="categories_side_menu.php">Browse Categories Side Menu Page</a></li>
+                          
                                 <li><a href="subscription.php">Subscription Page</a></li>
                                 <li><a href="login.php">Login Page</a></li>
                                 <li><a href="registration.php">Signup Page</a></li>
                             </ul>
                         </li>
-                        <li><a href="categories.php">Categories</a></li>
+                
                         <li><a href="channel.php">Channels</a></li>
                     </ul>
                 </li>

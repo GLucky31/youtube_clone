@@ -1,4 +1,8 @@
-<?php include 'header.php'; ?>
+
+<?php 
+session_start();
+include 'header.php'; ?>
+
 <!-- goto -->
 <div class="container-fluid">
     <div class="row">
@@ -51,21 +55,14 @@
                     <p class="u-text1">Select Video files to upload</p>
                     
 
-                    <form action="upload-edit.php" method="post" class="flex" enctype="multipart/form-data">
+
+
+                    <form id="form" method="post" action="upload_script.php" class="flex" enctype="multipart/form-data">
                        
-                        <input type='file' id="file" style="display: none" onchange="form.submit()" >
+                        <input type='file' name='file' id="file"  >
                         <label for="file" class="display center-text btn btn-primary u-btn"><b>Choose a file...</b></label>
-                    
+                        <input type="submit" name="submit" >
                     </form>
                 </div>
-
-                <div class="u-terms">
-                    <p>By submitting your videos to circle, you acknowledge that you agree to circle's <a href="#">Terms of Service</a> and <a href="#">Community Guidelines</a>.</p>
-                    <p class="hidden-xs">Please be sure not to violate others' copyright or privacy rights. Learn more</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
+                <div class="container-fluid u-details-wrap">
 <?php include 'footer.php'; ?>
