@@ -252,6 +252,33 @@ if(isset($_GET['id']))
                                         </ul>
                                     </div>
                                 </div>
+                                <!-- foreach loop that selects every comment with the video id with pdo and displays it -->
+<?php
+    $stmt = $pdo->prepare("SELECT * FROM comments WHERE id_video = ? AND FK_id_comment IS NULL");
+    $stmt->execute([$id]);
+    $comments = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    foreach($comments as $comment){
+        $query = "SELECT * FROM users WHERE id_user=?";
+    $stmt = $pdo->prepare($query);
+    $stmt->execute([$comment['id_user']]);
+    $user = $stmt->fetch();
+        echo "<div class='cl-comment'>
+                                    <div class='cl-avatar'><a href='#'><img src='images/ava8.png' alt=''></a></div>
+                                    <div class='cl-comment-text'>
+                                        <div class='cl-name-date'><a href='#'>".$user['username']."</a> . 1 week ago</div>
+                                        <div class='cl-text'>".$comment['content']."</div>
+                                        <div class='cl-meta'><span class='green'><span class='circle'></span> 121</span> <span class='grey'><span class='circle'></span> 2</span> . <a href='#'>Reply</a></div>
+                                        <div class='cl-replies'><a href='#'>View all 5 replies <i class='fa fa-chevron-down' aria-hidden='true'></i></a></div>
+                                        <div class='cl-flag'><a href='#'><i class='cv cvicon-cv-flag'></i></a></div>
+                                    </div>
+                                    <div class='clearfix'></div>
+                                </div>";
+    }
+    $query="SELECT * FROM comments WHERE FK_id_comment = ?";
+    $stmt = $pdo->prepare($query);
+    $stmt->execute([$comment['id_comment']]);
+    $user = $stmt->fetch();
+?>
 
                                 <!-- comment -->
                                 <div class="cl-comment">

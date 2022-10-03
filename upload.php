@@ -59,10 +59,12 @@ include 'header.php'; ?>
 
                     <form id="form" method="post" action="upload_script.php" class="flex" enctype="multipart/form-data">
                        
-                        <input type='file' name='file' id="file"  >
-                        <label for="file" class="display center-text btn btn-primary u-btn"><b>Choose a file...</b></label>
-                        <input type="submit" name="submit" >
+                        <input type='file' name='file' style="display:none" id="file"  >
+                        <label for="file" class="display center-text btn btn-primary u-btn" ><b>Choose a file...</b></label>
+                        <input type="submit" name="submit" class="btn btn-primary u-btn" value="Upload">
                     </form>
                 </div>
                 <div class="container-fluid u-details-wrap">
 <?php include 'footer.php'; ?>
+
+
