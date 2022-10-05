@@ -1,8 +1,7 @@
 <?php
 session_start() ;
 include 'database.php' ;
-include "header.php"; ?>
-<?php
+
 if(!isset($_SESSION['id_user']))
 {
     header("location:login.php");
@@ -15,22 +14,24 @@ else{
     $user = $stmt->fetch();
     $username=$user['username'];
     $email=$user['email'];
-    $pass=$user['pass'];}
-    ?>
+}
+    
+include "header.php"; ?>
+
 
 <!-- form for changing user details like username, profile picture, password -->
 <div class="container">
     <div class="row">
         <div class="col-md-12">
             <h1>Change your details</h1>
-            <form action="user-options-script.php" method="post" enctype="multipart/form-data">
+            <form  method="post">
                 <div class="form-group">
                     <label for="username">Username</label>
                     <input type="text" class="form-control" name="username" id="username" value="<?php echo $_SESSION['username']; ?>">
                 </div>
                 <div class="form-group">
                     <label for="email">Email</label>
-                    <input type="email" class="form-control" name="email" id="email" value="<?php echo $_SESSION['email']; ?>">
+                    <input type="email" class="form-control" name="email" id="email" value="<?php echo $email; ?>">
                 </div>
                 <div class="form-group">
                     <label for="profile_picture">Profile picture</label>
@@ -48,4 +49,8 @@ else{
             </form>
         </div>
     </div>
+
+    </div>
+</div>
+
 <?php include "footer.php"; ?>

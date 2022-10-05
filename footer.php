@@ -71,5 +71,7 @@
 <script src="bootstrap/js/bootstrap.min.js"></script>
 <script  src="js/vendor/player/johndyer-mediaelement-89793bc/build/mediaelement-and-player.min.js"></script>
 <script src="js/custom.js"></script>
+<script src="cropperjs/cropper.min.js"></script>
+
 </body>
 </html>
