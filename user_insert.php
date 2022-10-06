@@ -13,6 +13,11 @@ if (!empty($username)
         && !empty($email)  && !empty($pass1)
         && ($pass1 == $pass2)) {
     
+         $check="SELECT * FROM users WHERE email=?"
+         $stmt = $pdo->prepare($query);
+         $stmt->execute([$email]);
+         $count = $stmt->rowCount();
+         if(!($count>0)){
     //$pass = sha1($pass1.$salt);
     $pass = password_hash($pass1, PASSWORD_DEFAULT);
     
@@ -22,7 +27,7 @@ if (!empty($username)
     $stmt = $pdo->prepare($query);
     $stmt->execute([$username,$email,$pass]);
     
-    header("Location: login.php");
+    header("Location: login.php");}
 }
 else {
     header("Location: registration.php");
