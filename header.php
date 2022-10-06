@@ -11,7 +11,7 @@
     <link rel="icon" href="favicon.png">
 
     <title>Circle Video</title>
-
+    <link href="css/bootstrap.min.css" rel="stylesheet">
     <!-- Bootstrap core CSS -->
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="js/vendor/rangeSlider/css/ion.rangeSlider.css" rel="stylesheet">
@@ -121,6 +121,7 @@
                                 <ul class="dropdown-menu">
                                     <?php if(isset($_SESSION['id_user']))
                                     {
+                                        echo "<li><a href='user-menu.php'>Account</a></li>";
                                         echo "<li><a href='logout.php'>Logout</a></li>";
                                     }
                                     else
