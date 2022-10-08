@@ -72,6 +72,8 @@
 <script  src="js/vendor/player/johndyer-mediaelement-89793bc/build/mediaelement-and-player.min.js"></script>
 <script src="js/custom.js"></script>
 <script src="cropperjs/cropper.min.js"></script>
+<!-- croppie cdn -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.2/croppie.min.js"></script>
 
 </body>
 </html>

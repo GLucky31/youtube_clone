@@ -24,7 +24,7 @@ include "header.php"; ?>
     <div class="row">
         <div class="col-md-12">
             <h1>Change your details</h1>
-            <form  method="post">
+            <form action="user-edit.php"  method="post">
                 <div class="form-group">
                     <label for="username">Username</label>
                     <input type="text" class="form-control" name="username" id="username" value="<?php echo $_SESSION['username']; ?>">
@@ -45,12 +45,37 @@ include "header.php"; ?>
                     <label for="pass2">Repeat password</label>
                     <input type="password" class="form-control" name="pass2" id="pass2">
                 </div>
-                <input type="submit" class="btn btn-primary" name="submit">Submit</input>
+                <input type="submit" class="btn btn-primary" name="submit">
             </form>
+            <!-- red button with alert that deletes account -->
+            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">
+                Delete account
+            </button>
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Delete account</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            Are you sure you want to delete your account?
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <a href="delete-account.php" class="btn btn-danger">Delete</a>
+                        </div>
+                    </div>
+                </div>
+
         </div>
     </div>
 
     </div>
 </div>
 
+
+    
 <?php include "footer.php"; ?>
