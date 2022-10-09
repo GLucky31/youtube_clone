@@ -18,6 +18,16 @@ if(isset($_GET['id']))
     $user = $stmt->fetch();
     $username = $user['username'];
     $video_path = "videos/".$video['video'];
+   /* $likequery = "SELECT * FROM video_likes WHERE id_video = ? AND like=1";
+    $stmt = $pdo->prepare($likequery);
+    $stmt->execute([$id]);
+    $likes = $stmt->rowCount();
+    $likes = $stmt->fetchAll();
+    $dislikequery = "SELECT * FROM video_likes WHERE id_video = ? AND dislike=1";
+    $stmt = $pdo->prepare($dislikequery);
+    $stmt->execute([$id]);
+    $dislikes = $stmt->rowCount();
+    $dislikes = $stmt->fetchAll();*/
  }
  else
  {
@@ -33,8 +43,11 @@ if(isset($_GET['id']))
                     <video poster="images/single-video.png" style="width:100%;height:100%;" controls="controls" width="100%" height="100%">
                         <source src="<?php echo $video_path; ?>" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'></source>
                     </video>
+                    
                 </div>
                 <h1><a href="#"><?php echo $title; ?></a></h1>
+                <button class="btn" onclick="window.location.href='video-rate.php?id=1&vidid=<?php echo $id; ?>'" id="green"><i class="fa fa-thumbs-up fa-lg" aria-hidden="true"></i></button>
+  <button class="btn" onclick="window.location.href='video-rate.php?id=0&vidid=<?php echo $id; ?>'" id="red"><i class="fa fa-thumbs-down fa-lg" aria-hidden="true"></i></button>
                 <div class="acide-panel acide-panel-top">
                     <a href="#"><i class="cv cvicon-cv-watch-later" data-toggle="tooltip" data-placement="top" title="Watch Later"></i></a>
                     <a href="#"><i class="cv cvicon-cv-liked" data-toggle="tooltip" data-placement="top" title="Liked"></i></a>
@@ -45,7 +58,9 @@ if(isset($_GET['id']))
                         <a href="#"><img src="images/channel-user.png" alt="" class="sv-avatar"></a>
                         <div class="sv-name">
                             <div><a href="channel.php?id=<?php echo $user_id; ?>"><?php echo $username ?></a> . 52 Videos</div>
+             
                             <div class="c-sub hidden-xs">
+
                                 <div class="c-f">
                                     Subscribe
                                 </div>
@@ -233,8 +248,9 @@ if(isset($_GET['id']))
                                 <div class="rc-header"><i class="cv cvicon-cv-comment"></i> <span class="semibold">236</span> Comments</div>
                                 <div class="rc-ava"><a href="#"><img src="images/ava5.png" alt=""></a></div>
                                 <div class="rc-comment">
-                                    <form action="#" method="post">
-                                        <textarea rows="3">Share what you think?</textarea >
+                                    <form action="comment-upload.php" method="post">
+                                         <input type="hidden" name="video_id" value="<?php echo "$id"; ?>">
+                                        <textarea name="msg" rows="3">Share what you think?</textarea >
                                         <button type="submit">
                                             <i class="cv cvicon-cv-add-comment"></i>
                                         </button>
@@ -268,31 +284,14 @@ if(isset($_GET['id']))
                                         <div class='cl-name-date'><a href='#'>".$user['username']."</a> . 1 week ago</div>
                                         <div class='cl-text'>".$comment['content']."</div>
                                         <div class='cl-meta'><span class='green'><span class='circle'></span> 121</span> <span class='grey'><span class='circle'></span> 2</span> . <a href='#'>Reply</a></div>
-                                        <div class='cl-replies'><a href='#'>View all 5 replies <i class='fa fa-chevron-down' aria-hidden='true'></i></a></div>
+                                        
                                         <div class='cl-flag'><a href='#'><i class='cv cvicon-cv-flag'></i></a></div>
                                     </div>
                                     <div class='clearfix'></div>
                                 </div>";
     }
-    $query="SELECT * FROM comments WHERE FK_id_comment = ?";
-    $stmt = $pdo->prepare($query);
-    $stmt->execute([$comment['id_comment']]);
-    $user = $stmt->fetch();
 ?>
 
-                                <!-- comment -->
-                                <div class="cl-comment">
-                                    <div class="cl-avatar"><a href="#"><img src="images/ava8.png" alt=""></a></div>
-                                    <div class="cl-comment-text">
-                                        <div class="cl-name-date"><a href="#">BOWTZ pros</a> . 1 week ago</div>
-                                        <div class="cl-text">Really great story. You're doing a great job. Keep it up pal.</div>
-                                        <div class="cl-meta"><span class="green"><span class="circle"></span> 121</span> <span class="grey"><span class="circle"></span> 2</span> . <a href="#">Reply</a></div>
-                                        <div class="cl-replies"><a href="#">View all 5 replies <i class="fa fa-chevron-down" aria-hidden="true"></i></a></div>
-                                        <div class="cl-flag"><a href="#"><i class="cv cvicon-cv-flag"></i></a></div>
-                                    </div>
-                                    <div class="clearfix"></div>
-                                </div>
-                                <!-- END comment -->
 
                                 <!-- reply comment -->
                                 <div class="cl-comment-reply">
@@ -306,78 +305,13 @@ if(isset($_GET['id']))
                                 </div>
                                 <!-- END reply comment -->
 
-                                <!-- comment -->
-                                <div class="cl-comment">
-                                    <div class="cl-avatar"><a href="#"><img src="images/ava2.png" alt=""></a></div>
-                                    <div class="cl-comment-text">
-                                        <div class="cl-name-date"><a href="#">Isleifna</a> . 1 week ago</div>
-                                        <div class="cl-text">Omg thank you so much, idk how I couldn't figure out that master trap</div>
-                                        <div class="cl-meta"><span class="green"><span class="circle"></span> 245</span> <span class="grey"><span class="circle"></span> 19</span> . <a href="#">Reply</a></div>
-                                    </div>
-                                    <div class="clearfix"></div>
-                                </div>
-                                <!-- END comment -->
-
-                                <!-- comment -->
-                                <div class="cl-comment">
-                                    <div class="cl-avatar"><a href="#"><img src="images/ava3.png" alt=""></a></div>
-                                    <div class="cl-comment-text">
-                                        <div class="cl-name-date"><a href="#">Mark</a> . 2 days ago</div>
-                                        <div class="cl-text">you welcome could you watch my video plz dude you are awsome</div>
-                                        <div class="cl-meta"><span class="green"><span class="circle"></span> 516</span> <span class="grey"><span class="circle"></span> 64</span> . <a href="#">Reply</a></div>
-                                    </div>
-                                    <div class="clearfix"></div>
-                                </div>
-                                <!-- END comment -->
-
-                                <!-- comment -->
-                                <div class="cl-comment">
-                                    <div class="cl-avatar"><a href="#"><img src="images/ava4.png" alt=""></a></div>
-                                    <div class="cl-comment-text">
-                                        <div class="cl-name-date"><a href="#">High_on_meme</a> . 4 days ago</div>
-                                        <div class="cl-text">People allover the world took his music to heart and that music coming from his soul</div>
-                                        <div class="cl-meta"><span class="green"><span class="circle"></span> 95</span> <span class="grey"><span class="circle"></span> 0</span> . <a href="#">Reply</a></div>
-                                    </div>
-                                    <div class="clearfix"></div>
-                                </div>
-                                <!-- END comment -->
-
-                                <!-- reply comment -->
-                                <div class="cl-comment-reply">
-                                    <div class="cl-avatar"><a href="#"><img src="images/ava5.png" alt=""></a></div>
-                                    <div class="cl-comment-text">
-                                        <div class="cl-name-date"><a href="#">Battlefeelz</a> . 19 hours ago</div>
-                                        <div class="cl-text">He looks like Rhett with the most glorious wig ever</div>
-                                        <div class="cl-meta"><span class="green"><span class="circle"></span> 871</span> <span class="grey"><span class="circle"></span> 32</span> . <a href="#">Reply</a></div>
-                                    </div>
-                                    <div class="clearfix"></div>
-                                </div>
-                                <!-- END reply comment -->
-
-                                <div class="row hidden-xs">
-                                    <div class="col-lg-12">
-                                        <div class="loadmore-comments">
-                                            <form action="#" method="post">
-                                                <button class="btn btn-default h-btn">Load more Comments</button>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
+                               
                             </div>
                         </div>
                         <!-- END comments -->
                     </div>
                 </div>
-                <div class="content-block head-div head-arrow visible-xs">
-                    <div class="head-arrow-icon">
-                        <i class="cv cvicon-cv-next"></i>
-                    </div>
-                    <div class="adblock2 adblock2-v2">
-                        <div class="img">
-                            <span>Google AdSense 300 x 250</span>
-                        </div>
-                    </div>
-                </div>
+                
             </div>
 
             <!-- right column -->
@@ -450,27 +384,7 @@ if(isset($_GET['id']))
                         </div>
                         <div class="clearfix"></div>
                     </div>
-                </div>
-                <!-- END up next -->
-
-                <div class="adblock">
-                    <div class="img">
-                        Google AdSense<br>
-                        336 x 280
-                    </div>
-                </div>
-
-                <!-- Recomended Videos -->
-                <div class="caption">
-                    <div class="left">
-                        <a href="#">Recomended Videos</a>
-                    </div>
-                    <div class="right">
-                        <a href="#">Autoplay <i class="cv cvicon-cv-btn-off"></i></a>
-                    </div>
-                    <div class="clearfix"></div>
-                </div>
-                <div class="list">
+                
                     <div class="h-video row">
                         <div class="col-lg-6 col-sm-6">
                             <div class="v-img">

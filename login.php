@@ -1,11 +1,12 @@
 <?php
 session_start();
-include_once './header.php';
 
 if(isset($_SESSION['id_user']))
 {
     header("Location:index.php");
 }
+include_once './header.php';
+
 ?>
 <div class="container-fluid bg-image">
     <div class="row">

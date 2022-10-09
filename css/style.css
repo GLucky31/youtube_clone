@@ -4,3 +4,11 @@
     justify-content: center;
     align-items: center; /* Optional */
 }
+.pad 
+{
+    margin-left: 10% ;
+}
+.pad-top{
+    margin-top: 5% ;
+    margin-bottom: 5% ;
+}

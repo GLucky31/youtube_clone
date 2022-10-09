@@ -1,30 +1,32 @@
 <?php session_start() ;
 include 'database.php' ;
-if(!isset($_SESSION['id_user']))
+if(!isset($_SESSION['id_user'])||!isset($_POST['submit']))
 {
     header("location:login.php");
 }
-$username = $_POST['username'];
-$email=$_POST['email'];
-$pass1=$_POST['pass1'];
-$pass2=$_POST['pass2'];
-if(isset($_POST['submit'])){
-    /*if($pass1==$pass2 && $pass1!="" && $pass2!=""){
-        $query = "UPDATE users SET pass=? WHERE id_user=?";
+else{
+    $id=$_SESSION['id_user'];
+    $email=$_POST['email'];
+    $username=$_POST['username'];
+    $pass1=$_POST['pass1'];
+    $pass2=$_POST["pass2"];
+    if($pass1===$pass2&&(!(empty($pass1))||!(empty($pass2)))){
+        $pass = password_hash($_POST['pass1'], PASSWORD_DEFAULT) ;
+        $query= "UPDATE users SET pass=? WHERE id_user=? ";
         $stmt = $pdo->prepare($query);
-        $pass = password_hash($pass1, PASSWORD_DEFAULT);    
-        $stmt->execute([$pass, $id]);
-    }*/
-    if(!empty($username) && $username!=$usernamesess){
-        $query = "UPDATE users SET username=? WHERE id_user=?";
-        $stmt = $pdo->prepare($query);
-        $stmt->execute([$username, $id]);
-    }
-    if(!empty($email) && $email!=$emailsess&& $emailcount==0){
-        $query = "UPDATE users SET email=? WHERE id_user=?";
-        $stmt = $pdo->prepare($query);
-        $stmt->execute([$email, $id]);
-    }
-    header("location:user-options.php");
+        $stmt->execute([$pass,$id]);
+}
+if(!(empty($email))){
+    $query= "UPDATE users SET email=? WHERE id_user=? ";
+    $stmt = $pdo->prepare($query);
+    $stmt->execute([$email,$id]);
+}
+if(!(empty($username))){
+    $query= "UPDATE users SET username=? WHERE id_user=? ";
+    $stmt = $pdo->prepare($query);
+    $stmt->execute([$username,$id]);
+    $_SESSION['username']=$username;
+}
+header("location:user-options.php");
 }
 ?>
