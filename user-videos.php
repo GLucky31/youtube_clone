@@ -26,7 +26,7 @@ echo "<div class=' col-lg-3 col-sm-6 videoitem'>
                                 <div class='b-video'>
                                     <div class='v-img'>
                                         <a href='single-video.php?id=".$video['id_video']."'><img src='images/video1-1.png' alt=''></a>
-                                        <div class='time'>".$file['playtime_string']."</div>
+                                        <div class='time'>".$file['playtime_seconds']."</div>
                                     </div>
                                     <div class='v-desc'>
                                         <a href='single-video.php?id=".$video['id_video']."'>".$video['title']."</a>
