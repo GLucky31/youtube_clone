@@ -18,21 +18,34 @@ if(isset($_GET['id']))
     $user = $stmt->fetch();
     $username = $user['username'];
     $video_path = "videos/".$video['video'];
-   /* $likequery = "SELECT * FROM video_likes WHERE id_video = ? AND like=1";
-    $stmt = $pdo->prepare($likequery);
-    $stmt->execute([$id]);
-    $likes = $stmt->rowCount();
-    $likes = $stmt->fetchAll();
-    $dislikequery = "SELECT * FROM video_likes WHERE id_video = ? AND dislike=1";
-    $stmt = $pdo->prepare($dislikequery);
-    $stmt->execute([$id]);
-    $dislikes = $stmt->rowCount();
-    $dislikes = $stmt->fetchAll();*/
+    if(isset($_SESSION['id_user']))
+    {
+    $query = "SELECT * FROM video_likes WHERE id_video = ? AND id_user = ?";
+    $stmt = $pdo->prepare($query);
+    $stmt->execute([$id,$_SESSION['id_user']]);
+    $rating = $stmt->fetch();
+    $count= $stmt->rowCount();
+    if($count==1)
+    {
+        if($rating['likes']==1 && $rating['dislikes']==0)
+        {
+            $like=1;
+        }
+        else
+        {
+            $dislike=1;
+        }
+    }
  }
- else
- {
-    header("Location: index.php");
  }
+ $query= "SELECT * FROM video_likes WHERE id_video = ? and likes = 1";
+    $stmt = $pdo->prepare($query);
+    $stmt->execute([$id]);
+    $likecount= $stmt->rowCount();
+    $query= "SELECT * FROM video_likes WHERE id_video = ? and dislikes = 1";
+    $stmt = $pdo->prepare($query);
+    $stmt->execute([$id]);
+    $dislikecount = $stmt->rowCount();
 ?>
 
 <div class="content-wrapper">
@@ -46,9 +59,16 @@ if(isset($_GET['id']))
                     
                 </div>
                 <h1><a href="#"><?php echo $title; ?></a></h1>
-                <button class="btn" onclick="window.location.href='video-rate.php?id=1&vidid=<?php echo $id; ?>'" id="green"><i class="fa fa-thumbs-up fa-lg" aria-hidden="true"></i></button>
-  <button class="btn" onclick="window.location.href='video-rate.php?id=0&vidid=<?php echo $id; ?>'" id="red"><i class="fa fa-thumbs-down fa-lg" aria-hidden="true"></i></button>
+                <button class="btn <?php if(isset($like)&&$like==1){
+                 echo "btn-success";   
+                }?>" onclick="window.location.href='video-rate.php?id=1&vidid=<?php echo $id; ?>'" id="green"><i class="fa fa-thumbs-up fa-lg" aria-hidden="true"></i></button>
+                <?php echo "<span style='color: white;'>".$likecount."</span>"; ?>
+  <button class="btn <?php if(isset($dislike)&&$dislike==1){
+                 echo "btn-danger";   
+                }?>" onclick="window.location.href='video-rate.php?id=0&vidid=<?php echo $id; ?>'" id="red"><i class="fa fa-thumbs-down fa-lg" aria-hidden="true"></i></button>
+                 <?php echo "<span style='color: white;'>".$dislikecount."</span>"; ?>
                 <div class="acide-panel acide-panel-top">
+               
                     <a href="#"><i class="cv cvicon-cv-watch-later" data-toggle="tooltip" data-placement="top" title="Watch Later"></i></a>
                     <a href="#"><i class="cv cvicon-cv-liked" data-toggle="tooltip" data-placement="top" title="Liked"></i></a>
                     <a href="#"><i class="cv cvicon-cv-flag" data-toggle="tooltip" data-placement="top" title="Flag"></i></a>
@@ -278,6 +298,27 @@ if(isset($_GET['id']))
     $stmt = $pdo->prepare($query);
     $stmt->execute([$comment['id_user']]);
     $user = $stmt->fetch();
+    if(isset($_SESSION['id_user']))
+    {
+    $query = "SELECT * FROM comment_likes WHERE id_comment = ? AND id_user = ?";
+    $stmt = $pdo->prepare($query);
+    $stmt->execute([$comment['id_comment'],$_SESSION['id_user']]);
+    $comrating = $stmt->fetch();
+    $countcom= $stmt->rowCount();
+    $comlike=0;
+    $comdislike=0;
+    if($countcom==1)
+    {
+        if($comrating['likes']==1 && $comrating['dislikes']==0)
+        {
+            $comlike=1;
+        }
+        else
+        {
+            $comdislike=1;
+        }
+    }
+ }
         echo "<div class='cl-comment'>
                                     <div class='cl-avatar'><a href='#'><img src='images/ava8.png' alt=''></a></div>
                                     <div class='cl-comment-text'>
@@ -289,6 +330,18 @@ if(isset($_GET['id']))
                                     </div>
                                     <div class='clearfix'></div>
                                 </div>";
+                                echo "<a class='btn'";
+                                if(isset($comlike)&&$comlike==1){
+                                    echo "style='background-color:green'";   
+                                                             }
+                                echo " href='comment-rate.php?id=1&vidid=".$id."&comid=".$comment['id_comment']."'><i class='fa fa-thumbs-up fa-lg' aria-hidden='true'></i></a>";
+                                echo "<a class='btn'";  
+                                if(isset($comdislike)&&$comdislike==1){
+                                                echo "style='background-color:red'";   
+                                                }
+                                echo " href='comment-rate.php?id=0&vidid=".$id."&comid=".$comment['id_comment']."'><i class='fa fa-thumbs-down fa-lg' aria-hidden='true'></i></a>";
+                                
+                                
     }
 ?>
 

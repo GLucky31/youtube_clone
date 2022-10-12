@@ -6,10 +6,10 @@ if(!isset($_SESSION['id_user'])){
 else{
     $id = $_SESSION['id_user'];
     $rating = $_GET['id'];
-    $vidid = $_GET['vidid'];
-    $query1 = 'SELECT * FROM video_likes WHERE id_user = ? AND id_video = ?';
+    $comid = $_GET['comid'];
+    $query1 = 'SELECT * FROM comment_likes WHERE id_user = ? AND id_comment = ?';
     $stmt1 = $pdo->prepare($query1);
-    $stmt1->execute([$id, $vidid]);
+    $stmt1->execute([$id, $comid]);
     $count = $stmt1->rowCount();
     $like = $stmt1->fetch();
             
@@ -17,15 +17,15 @@ else{
         switch ($rating) {
 
             case 1:
-            $query2 = 'INSERT INTO video_likes(id_video, id_user, likes, dislikes) VALUES(?,?,?,?);';
+            $query2 = 'INSERT INTO comment_likes(id_comment, id_user, likes, dislikes) VALUES(?,?,?,?);';
             $stmt2 = $pdo->prepare($query2);
-            $stmt2->execute([$vidid, $id,1,0]);
+            $stmt2->execute([$comid, $id,1,0]);
                 break;
     
             case 0:
-                $query2 = 'INSERT INTO video_likes(id_video, id_user, likes, dislikes) VALUES(?,?,?,?)';
+                $query2 = 'INSERT INTO comment_likes(id_comment, id_user, likes, dislikes) VALUES(?,?,?,?)';
             $stmt2 = $pdo->prepare($query2);
-            $stmt2->execute([$vidid, $id,0,1]);
+            $stmt2->execute([$comid, $id,0,1]);
                 break;
             }
     }
@@ -33,30 +33,30 @@ else{
         if($like['likes']==0 && $like['dislikes']==1) {
             switch ($rating) {
                 case 1:
-                $query2 = 'UPDATE video_likes SET likes = 1, dislikes = 0 WHERE id_user = ? AND id_video = ? ;';
+                $query2 = 'UPDATE comment_likes SET likes = 1, dislikes = 0 WHERE id_user = ? AND id_comment = ? ;';
                 $stmt2 = $pdo->prepare($query2);
-                $stmt2->execute([$id, $vidid]);
+                $stmt2->execute([$id, $comid]);
                     break;
         
                 case 0:
-                $query2 ='DELETE FROM video_likes WHERE id_user = ? AND id_video = ? ;';
+                $query2 ='DELETE FROM comment_likes WHERE id_user = ? AND id_comment = ? ;';
                 $stmt2 = $pdo->prepare($query2);
-                $stmt2->execute([$id, $vidid]);
+                $stmt2->execute([$id, $comid]);
                     break;
             }
         }
         elseif($like['likes']==1 && $like['dislikes']==0){
             switch ($rating) {
                 case 1:
-                $query2 = 'DELETE FROM video_likes WHERE id_user = ? AND id_video = ? ;';
+                $query2 = 'DELETE FROM comment_likes WHERE id_user = ? AND id_comment = ? ;';
                 $stmt2 = $pdo->prepare($query2);
-                $stmt2->execute([$id, $vidid]);
+                $stmt2->execute([$id, $comid]);
                     break;
         
                 case 0:
-                $query2 = 'UPDATE video_likes SET likes = 0, dislikes = 1 WHERE id_user = ? AND id_video = ? ;';
+                $query2 = 'UPDATE comment_likes SET likes = 0, dislikes = 1 WHERE id_user = ? AND id_comment = ? ;';
                 $stmt2 = $pdo->prepare($query2);
-                $stmt2->execute([$id, $vidid]);
+                $stmt2->execute([$id, $comid]);
                     break;
             }
         }

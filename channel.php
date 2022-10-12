@@ -98,7 +98,7 @@ if(isset($_SESSION['id_user'])&&($_SESSION['id_user']!=$_GET['id']))
                                                 }
                                                 else
                                                 {
-                                                    echo "<a href='unsubscribe.php?id=".$_GET['id']."' class='btn btn-secondary btn-sm'>Unsubscribe</a>";
+                                                    echo "<a href='unsubscribe.php?id=".$_GET['id']."' class='btn btn-success btn-sm'>Unsubscribe</a>";
                                                 }
                                                 
                                             }?>

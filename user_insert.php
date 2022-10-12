@@ -13,7 +13,7 @@ if (!empty($username)
         && !empty($email)  && !empty($pass1)
         && ($pass1 == $pass2)) {
     
-         $check="SELECT * FROM users WHERE email=?"
+         $query="SELECT * FROM users WHERE email=?";
          $stmt = $pdo->prepare($query);
          $stmt->execute([$email]);
          $count = $stmt->rowCount();
