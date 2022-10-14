@@ -117,7 +117,7 @@ if(isset($_GET['id']))
                         <p>Gaming , PS4 Exclusive , Gameplay , 1080p</p>
 
                         <h4>About :</h4>
-                        <p>Three years after the events of Uncharted 3: Drake's Deception, Nathan Drake, now retired as a fortune hunter, has settled into a normal life with his wife Elena Fisher. His world is then turned upside down when his older brother Sam, long believed to be dead, suddenly reappears seeking Drake's help.</p>
+                        <p style="color:white;"><?php echo $video['description']; ?></p>
 
                         <h4>Tags :</h4>
                         <p class="sv-tags">
