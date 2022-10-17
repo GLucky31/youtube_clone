@@ -87,17 +87,7 @@ if(isset($_GET['id']))
                     </div>
                     <div class="author-border"></div>
                     <div class="sv-views">
-                        <div class="sv-views-count">
-                            2,729,347 views
-                        </div>
-                        <div class="sv-views-progress">
-                            <div class="sv-views-progress-bar"></div>
-                        </div>
-                        <div class="sv-views-stats">
-                            <span class="percent">95%</span>
-                            <span class="green"><span class="circle"></span> 39,852</span>
-                            <span class="grey"><span class="circle"></span> 852</span>
-                        </div>
+                       
                         <button class="btn <?php if(isset($like)&&$like==1){
                  echo "btn-success";   
                 }?>" onclick="window.location.href='video-rate.php?id=1&vidid=<?php echo $id; ?>'" id="green"><i class="fa fa-thumbs-up fa-lg" aria-hidden="true"></i></button>
@@ -266,11 +256,17 @@ if(isset($_GET['id']))
                                     else {
                                         div".$reply['id_comment'].".style.display = 'block';
                                     }
-                                };</script>
+                                };</script>";
+                                
+                                echo "
                                 <div style='display: none;' id='replies".$reply['id_comment']."'>
                                 <form method='post' action='reply.php?com=".$comment['id_comment']."'>
-                                <input type='hidden' name='vidId' value='".$reply['id_user']."'>
-                                <input type='hidden' name='posterId' value='".$_SESSION['id_user']."'>
+                                <input type='hidden' name='vidId' value='".$reply['id_user']."'>";
+                                if(isset($_SESSION['id_user']))
+                                {
+                                echo"
+                                <input type='hidden' name='posterId' value='".$_SESSION['id_user']."'>";}
+                                echo "
                                 <textarea required name='reply'></textarea><input  type='submit' name='sub'></form></div>";
                                 if(isset($_SESSION['id_user']))
                                 {

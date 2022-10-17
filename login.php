@@ -8,6 +8,7 @@ if(isset($_SESSION['id_user']))
 include_once './header.php';
 
 ?>
+<div class="dark">
 <div class="container-fluid bg-image">
     <div class="row">
         <div class="login-wraper">
@@ -70,7 +71,7 @@ include_once './header.php';
         </div>
     </div>
 </div>
-
+</div>
 
 <?php
 include_once './footer.php';

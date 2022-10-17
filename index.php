@@ -57,13 +57,13 @@ echo "<br>".$_SESSION['admin'];}?>
                                     <div class='row'>";
                                        
                                                      
-                                                        $query="SELECT * FROM subscriptions WHERE id_user = ?";
+                                                        $query="SELECT * FROM subscriptions WHERE id_user_from = ?";
                                                         $stmt = $pdo->prepare($query);
                                                         $stmt->execute([$_SESSION['id_user']]);
                                                         $subs = $stmt->fetchAll();
                                                         $count = $stmt->rowCount();
                                                         if($count==0){
-                                                            echo "<h3>You are not subscribed to any channel</h3>";
+                                                            echo "<div style='color:white;'><h4>You are not subscribed to any channel</h3></div>";
                                                         }
                                                         else{
                                                             
@@ -77,7 +77,7 @@ echo "<br>".$_SESSION['admin'];}?>
                                                         $videosf = $stmt->fetchAll();
                                                         $counted= $stmt->rowCount();
                                                         if($counted==0){
-                                                            echo "<h3>There are no videos from your subscribed channels</h3>";
+                                                            echo "<h4 style='color:white;'>There are no videos from your subscribed channels</h3>";
                                                         }
                                                         else{
                                                         foreach($videosf as $video){   
