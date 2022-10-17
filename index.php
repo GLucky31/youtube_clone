@@ -6,8 +6,7 @@ include "header.php";
 $query = 'SELECT * FROM videos';
 $stmt = $pdo->query($query);
 $videos = $stmt->fetchAll();
-if(!isset($_SESSION['id_user'])){   
-    $query= }
+
 if(isset($_SESSION['ADMIN'])){
 echo "<br>".$_SESSION['admin'];}?>
 <div class="content-wrapper">
