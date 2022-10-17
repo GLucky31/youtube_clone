@@ -22,7 +22,7 @@ $videos = $stmt->fetchAll();
         foreach($videos as $video){
             $getID3 = new getID3;
 $file = $getID3->analyze("videos/".$video['video']);
-echo "<div class=' col-lg-3 col-sm-6 videoitem'>
+echo "<div class=' col-lg-12 col-sm-12 videoitem'>
                                 <div class='b-video'>
                                     <div class='v-img'>
                                         <a href='single-video.php?id=".$video['id_video']."'><img src='images/video1-1.png' alt=''></a>

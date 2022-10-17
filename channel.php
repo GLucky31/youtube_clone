@@ -33,6 +33,7 @@ if(isset($_SESSION['id_user'])&&($_SESSION['id_user']!=$_GET['id']))
 
     
     $count = $stmt->rowCount();}?>
+<div class="channel dark">
 <div class="container-fluid">
     <div class="row">
         <div class="img">
@@ -60,9 +61,7 @@ if(isset($_SESSION['id_user'])&&($_SESSION['id_user']!=$_GET['id']))
                             <div class="c-details">
                                 <div class="c-name">
                                     <?php echo $username; ?>    
-                                    <div class="c-checkbox">
-                                        <img src="images/verified-profile-icon.png" alt="">
-                                    </div>
+                                  
                                 </div>
                                 <div class="c-nav">
                                     <ul class="list-inline">
@@ -86,7 +85,7 @@ if(isset($_SESSION['id_user'])&&($_SESSION['id_user']!=$_GET['id']))
                                         </ul>
                                     </div>
                                 </div>
-                                <div class="c-sub pull-right hidden-xs">
+                                <div class=" pull-right hidden-xs">
                                     <div class="c-sub-wrap">
                                         <div class="c-f">
                                             <!-- red bootstrap button a tag with white text -->
@@ -105,7 +104,7 @@ if(isset($_SESSION['id_user'])&&($_SESSION['id_user']!=$_GET['id']))
 
                                         </div>
                                         <div class="c-s">
-                                            <?php echo $subscribers; ?>
+                                            <?php echo "<span style='color:white;'>".$subscribers."</span>"; ?>
                                         </div>
                                         <div class="clearfix"></div>
                                     </div>
@@ -180,25 +179,11 @@ if(isset($_SESSION['id_user'])&&($_SESSION['id_user']!=$_GET['id']))
                 </div>
                 <!-- /Featured Videos -->
 
-                <!-- pagination -->
-                <div class="v-pagination">
-                    <ul class="list-inline">
-                        <li class="v-pagination-prev"><a href="#"><i class="cv cvicon-cv-previous"></i></a></li>
-                        <li class="v-pagination-first"><a href="#">1</a></li>
-                        <li><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                        <li><a href="#">4</a></li>
-                        <li><a href="#">5</a></li>
-                        <li><a href="#">...</a></li>
-                        <li><a href="#">10</a></li>
-                        <li class="v-pagination-skin visible-xs"><a href="#">Skip 5 Pages</a></li>
-                        <li class="v-pagination-next"><a href="#"><i class="cv cvicon-cv-next"></i></a></li>
-                    </ul>
-                </div>
-                <!-- /pagination -->
+               
 
             </div>
         </div>
     </div>
 </div>
+                        </div>
 <?php include 'footer.php'; ?>

@@ -47,7 +47,7 @@ if(isset($_GET['id']))
     $stmt->execute([$id]);
     $dislikecount = $stmt->rowCount();
 ?>
-
+<div class="single-video dark">
 <div class="content-wrapper">
     <div class="container">
         <div class="row">
@@ -59,14 +59,7 @@ if(isset($_GET['id']))
                     
                 </div>
                 <h1><a href="#"><?php echo $title; ?></a></h1>
-                <button class="btn <?php if(isset($like)&&$like==1){
-                 echo "btn-success";   
-                }?>" onclick="window.location.href='video-rate.php?id=1&vidid=<?php echo $id; ?>'" id="green"><i class="fa fa-thumbs-up fa-lg" aria-hidden="true"></i></button>
-                <?php echo "<span style='color: white;'>".$likecount."</span>"; ?>
-  <button class="btn <?php if(isset($dislike)&&$dislike==1){
-                 echo "btn-danger";   
-                }?>" onclick="window.location.href='video-rate.php?id=0&vidid=<?php echo $id; ?>'" id="red"><i class="fa fa-thumbs-down fa-lg" aria-hidden="true"></i></button>
-                 <?php echo "<span style='color: white;'>".$dislikecount."</span>"; ?>
+               
                 <div class="acide-panel acide-panel-top">
                
                     <a href="#"><i class="cv cvicon-cv-watch-later" data-toggle="tooltip" data-placement="top" title="Watch Later"></i></a>
@@ -105,70 +98,32 @@ if(isset($_GET['id']))
                             <span class="green"><span class="circle"></span> 39,852</span>
                             <span class="grey"><span class="circle"></span> 852</span>
                         </div>
+                        <button class="btn <?php if(isset($like)&&$like==1){
+                 echo "btn-success";   
+                }?>" onclick="window.location.href='video-rate.php?id=1&vidid=<?php echo $id; ?>'" id="green"><i class="fa fa-thumbs-up fa-lg" aria-hidden="true"></i></button>
+                <?php echo "<span style='color: white;'>".$likecount."</span>"; ?>
+  <button class="btn <?php if(isset($dislike)&&$dislike==1){
+                 echo "btn-danger";   
+                }?>" onclick="window.location.href='video-rate.php?id=0&vidid=<?php echo $id; ?>'" id="red"><i class="fa fa-thumbs-down fa-lg" aria-hidden="true"></i></button>
+                 <?php echo "<span style='color: white;'>".$dislikecount."</span>"; ?>
                     </div>
                     <div class="clearfix"></div>
                 </div>
                 <div class="info">
                     <div class="info-content">
-                        <h4>Cast:</h4>
-                        <p>Nathan Drake , Victor Sullivan , Sam Drake , Elena Fisher</p>
-
-                        <h4>Category :</h4>
-                        <p>Gaming , PS4 Exclusive , Gameplay , 1080p</p>
 
                         <h4>About :</h4>
-                        <p style="color:white;"><?php echo $video['description']; ?></p>
+                        <p><?php echo $video['description']; ?></p>
 
-                        <h4>Tags :</h4>
-                        <p class="sv-tags">
-                            <span><a href="#">Uncharted 4</a></span>
-                            <span><a href="#">Playstation 4</a></span>
-                            <span><a href="#">Gameplay</a></span>
-                            <span><a href="#">1080P</a></span>
-                            <span><a href="#">ps4Share</a></span>
-                            <span><a href="#">+ 6</a></span>
-                        </p>
+                        
 
-                        <div class="row date-lic">
-                            <div class="col-xs-6">
-                                <h4>Release Date:</h4>
-                                <p>2 Days ago</p>
-                            </div>
-                            <div class="col-xs-6 ta-r">
-                                <h4>License:</h4>
-                                <p>Standard</p>
-                            </div>
-                        </div>
+                      
                     </div>
 
-                    <div class="showless hidden-xs">
-                        <a href="#">Show Less</a>
-                    </div>
-
-                    <div class="content-block head-div head-arrow head-arrow-top visible-xs">
-                        <div class="head-arrow-icon">
-                            <i class="cv cvicon-cv-next"></i>
-                        </div>
-                    </div>
-
-                    <div class="adblock2">
-                        <div class="img">
-                            <span class="hidden-xs">
-                                Google AdSense<br>728 x 90
-                            </span>
-                            <span class="visible-xs">
-                                Google AdSense 320 x 50
-                            </span>
-                        </div>
-                    </div>
+                 
 
                     <!-- similar videos -->
-                    <div class="caption hidden-xs">
-                        <div class="left">
-                            <a href="#">Similar Videos</a>
-                        </div>
-                        <div class="clearfix"></div>
-                    </div>
+                    
                     <div class="single-v-footer">
                         <div class="single-v-footer-switch">
                             <a href="#" class="active" data-toggle=".similar-v">
@@ -180,86 +135,7 @@ if(isset($_GET['id']))
                                 <span>236 Comments</span>
                             </a>
                         </div>
-                        <div class="similar-v single-video video-mobile-02">
-                            <div class="row">
-                                <div class="col-lg-3 col-sm-6 col-xs-12">
-                                    <div class="h-video row">
-                                        <div class="col-sm-12 col-xs-6">
-                                            <div class="v-img">
-                                                <a href="single-video-tabs.html"><img src="images/sv-12.png" alt=""></a>
-                                                <div class="time">7:18</div>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-12 col-xs-6">
-                                            <div class="v-desc">
-                                                <a href="single-video-tabs.html">3DS Games Of 2016 that blew our mind</a>
-                                            </div>
-                                            <div class="v-views">
-                                                630,347 views
-                                            </div>
-                                            <div class="v-percent"><span class="v-circle"></span> 83%</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3 col-sm-6 col-xs-12">
-                                    <div class="h-video row">
-                                        <div class="col-sm-12 col-xs-6">
-                                            <div class="v-img">
-                                                <a href="single-video-tabs.html"><img src="images/sv-13.png" alt=""></a>
-                                                <div class="time">23:18</div>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-12 col-xs-6">
-                                            <div class="v-desc">
-                                                <a href="single-video-tabs.html">Cornfield Chase Outlast II Official Gameplay</a>
-                                            </div>
-                                            <div class="v-views">
-                                                2,630,347 views
-                                            </div>
-                                            <div class="v-percent"><span class="v-circle"></span> 96%</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3 col-sm-6 col-xs-12">
-                                    <div class="h-video row">
-                                        <div class="col-sm-12 col-xs-6">
-                                            <div class="v-img">
-                                                <a href="single-video-tabs.html"><img src="images/sv-14.png" alt=""></a>
-                                                <div class="time">15:36</div>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-12 col-xs-6">
-                                            <div class="v-desc">
-                                                <a href="single-video-tabs.html">No Man's Sky: 21 Minutes of Gameplay</a>
-                                            </div>
-                                            <div class="v-views">
-                                                71,347 views
-                                            </div>
-                                            <div class="v-percent"><span class="v-circle"></span> 63%</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3 col-sm-6 col-xs-12">
-                                    <div class="h-video row">
-                                        <div class="col-sm-12 col-xs-6">
-                                            <div class="v-img">
-                                                <a href="single-video-tabs.html"><img src="images/sv-7.png" alt=""></a>
-                                                <div class="time">27:18</div>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-12 col-xs-6">
-                                            <div class="v-desc">
-                                                <a href="single-video-tabs.html">No Man's Sky: 21 Minutes of Gameplay</a>
-                                            </div>
-                                            <div class="v-views">
-                                                10,347 views
-                                            </div>
-                                            <div class="v-percent"><span class="v-circle"></span> 43%</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                       
                         <!-- END similar videos -->
 
                         <!-- comments -->
@@ -324,7 +200,7 @@ if(isset($_GET['id']))
                                     <div class='cl-comment-text'>
                                         <div class='cl-name-date'><a href='#'>".$user['username']."</a> . 1 week ago</div>
                                         <div class='cl-text'>".$comment['content']."</div>
-                                        <div class='cl-meta'><span class='green'><span class='circle'></span> 121</span> <span class='grey'><span class='circle'></span> 2</span> . <a href='#'>Reply</a></div>
+                                        <div class='cl-meta'><span class='green'><span class='circle'></span> 121</span> <span class='grey'><span class='circle'></span> 2</span> . <button id='reply".$comment['id_comment']."'>Reply</button></div>
                                         
                                         <div class='cl-flag'><a href='#'><i class='cv cvicon-cv-flag'></i></a></div>
                                     </div>
@@ -340,24 +216,101 @@ if(isset($_GET['id']))
                                                 echo "style='background-color:red'";   
                                                 }
                                 echo " href='comment-rate.php?id=0&vidid=".$id."&comid=".$comment['id_comment']."'><i class='fa fa-thumbs-down fa-lg' aria-hidden='true'></i></a>";
+                                echo "
+                                <script>var button".$comment['id_comment']." = document.getElementById('reply".$comment['id_comment']."');
+
+                                button".$comment['id_comment'].".onclick = function() {
+                                    var div".$comment['id_comment']." = document.getElementById('replies".$comment['id_comment']."');
+                                   
+                                    if (div".$comment['id_comment'].".style.display !== 'none') {
+                                        div".$comment['id_comment'].".style.display = 'none';
+                                    }
+                                    else {
+                                        div".$comment['id_comment'].".style.display = 'block';
+                                    }
+                                };</script>
+                                <div style='display: none;' id='replies".$comment['id_comment']."'>
+                                <form method='post' action='reply.php?com=".$comment['id_comment']."'>
+                                <input type='hidden' name='vidId' value='".$_GET['id']."'>
+                                <textarea required name='reply'></textarea><input  type='submit' name='sub'></form></div>";
+                                $queryreply="SELECT * FROM comments WHERE FK_id_comment=? AND id_video=?";
+                                $stmt = $pdo->prepare($queryreply );
+                                $stmt->execute([$comment['id_comment'],$_GET['id'] ]);
+                                $replies = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                                foreach($replies as $reply)
+                                {
+                                    $query = "SELECT * FROM users WHERE id_user=?";
+                                    $stmt = $pdo->prepare($query);
+                                    $stmt->execute([$reply['id_user']]);
+                                    $user = $stmt->fetch();
+                                    echo "<div class='cl-comment-reply'>
+                                    <div class='cl-avatar'><a href='#'><img src='images/ava7.png' alt=''></a></div>
+                                    <div class='cl-comment-text'>
+                                        <div class='cl-name-date'><a href='#'>
+                                        ".$user['username']."
+                                         </a> . 6 days ago</div>
+                                        <div class='cl-text'>".$reply['content']."</div>
+                                        <div class='cl-meta'><span class='green'><span class='circle'></span> 70</span> <span class='grey'><span class='circle'></span> 9</span> . <button id='reply".$reply['id_comment']."'>Reply</button></div>
+                                    </div>
+                                    <div class='clearfix'></div>
+                                </div>";
+                                echo "
+                                <script>var button".$reply['id_comment']." = document.getElementById('reply".$reply['id_comment']."');
+
+                                button".$reply['id_comment'].".onclick = function() {
+                                    var div".$reply['id_comment']." = document.getElementById('replies".$reply['id_comment']."');
+                                   
+                                    if (div".$reply['id_comment'].".style.display !== 'none') {
+                                        div".$reply['id_comment'].".style.display = 'none';
+                                    }
+                                    else {
+                                        div".$reply['id_comment'].".style.display = 'block';
+                                    }
+                                };</script>
+                                <div style='display: none;' id='replies".$reply['id_comment']."'>
+                                <form method='post' action='reply.php?com=".$comment['id_comment']."'>
+                                <input type='hidden' name='vidId' value='".$reply['id_user']."'>
+                                <input type='hidden' name='posterId' value='".$_SESSION['id_user']."'>
+                                <textarea required name='reply'></textarea><input  type='submit' name='sub'></form></div>";
+                                if(isset($_SESSION['id_user']))
+                                {
+                                $query5 = "SELECT * FROM comment_likes WHERE id_comment = ? AND id_user = ?";
+                                $stmt5 = $pdo->prepare($query5);
+                                $stmt5->execute([$reply['id_comment'],$_SESSION['id_user']]);
+                                $countrep= $stmt5->rowCount();
+                                $reprating = $stmt5->fetch();
                                 
+                                $replike=0;
+                                $repdislike=0;
+                                if($countrep==1)
+                                {
+                                    if($reprating['likes']==1 && $reprating['dislikes']==0)
+                                    {
+                                        $replike=1;
+                                    }
+                                    else
+                                    {
+                                        $repdislike=1;
+                                    }
+                                }
+                             }
+                                echo "<div class='reply-like'><div><a class='btn'";
+                                if(isset($replike)&&$replike==1){
+                                    echo "style='background-color:green'";   
+                                                             }
+                                echo " href='comment-rate.php?id=1&vidid=".$_GET['id']."&comid=".$reply['id_comment']."'><i class='fa fa-thumbs-up fa-lg' aria-hidden='true'></i></a>";
+                                echo "<a class='btn'";  
+                                if(isset($repdislike)&&$repdislike==1){
+                                                echo "style='background-color:red'";   
+                                                }
+                                echo " href='comment-rate.php?id=0&vidid=".$id."&comid=".$reply['id_comment']."'><i class='fa fa-thumbs-down fa-lg' aria-hidden='true'></i></a></div></div>";
                                 
+                                }
     }
 ?>
 
 
-                                <!-- reply comment -->
-                                <div class="cl-comment-reply">
-                                    <div class="cl-avatar"><a href="#"><img src="images/ava7.png" alt=""></a></div>
-                                    <div class="cl-comment-text">
-                                        <div class="cl-name-date"><a href="#">kingPIN</a> . 6 days ago</div>
-                                        <div class="cl-text"> I was stuck too. then I started to shoot everything in Doom.</div>
-                                        <div class="cl-meta"><span class="green"><span class="circle"></span> 70</span> <span class="grey"><span class="circle"></span> 9</span> . <a href="#">Reply</a></div>
-                                    </div>
-                                    <div class="clearfix"></div>
-                                </div>
-                                <!-- END reply comment -->
-
+                            
                                
                             </div>
                         </div>
@@ -646,5 +599,6 @@ if(isset($_GET['id']))
             </div>
         </div>
     </div>
+</div>
 </div>
 <?php include "footer.php"; ?>
