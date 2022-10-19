@@ -1,16 +1,25 @@
 <?php
 session_start();
+
 if(!isset($_GET['id']))
 {
     header('Location: index.php');
 }
 include 'database.php';
+$query = "SELECT * FROM users WHERE id_user=".$_GET['id'];
+$stmt = $pdo->query($query);
+$count = $stmt->rowCount();
+if($count == 0)
+{
+    header('Location: index.php');
+}
 include_once 'header.php'; 
 if(isset($_GET['id']))
 {
 }?>
 <!-- channel -->
 <?php 
+
  $query = "SELECT * FROM subscriptions WHERE id_user_to=?";
  $stmt = $pdo->prepare($query);
  $stmt->execute([ $_GET['id']]);

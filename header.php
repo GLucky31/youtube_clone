@@ -52,48 +52,18 @@
                     </div>
                     <div class="col-lg-3 col-sm-10 hidden-xs">
                         <ul class="list-inline menu">
-                            <li class="color-active">
-                                <a href="#">Pages</a>
-                                <ul>
-                                    <li><a href="index.php">Home Page</a></li>
-                                    <li><a href="single-video.php">Single Video Page</a></li>
-                                    <li><a href="single-video-youtube.php">Single Video Youtube Embedded Page</a></li>
-                                    <li><a href="single-video-vimeo.php">Single Video Vimeo Embedded Page</a></li>
-                                    <li><a href="upload.php">Upload Video Page</a></li>
-                                    <li><a href="upload-edit.php">Upload Video Edit Page</a></li>
-                                    <li><a href="search.php">Searched Videos Page</a></li>
-                                    <li><a href="channel.php">Single Channel Page</a></li>
-                                    <li><a href="channels.php">Channels Page</a></li>
-                                    <li><a href="single-video-tabs.php">Single Videos Page With Tabs</a></li>
-                                    <li><a href="single-video-playlist.php">Single Videos Page With Playlist</a></li>
-                                    <li><a href="history.php">History Page</a></li>
-                          
-                                    <li><a href="subscription.php">Subscription Page</a></li>
-                                    <li><a href="login.php">Login Page</a></li>
-                                    <li><a href="registration.php">Signup Page</a></li>
-                                </ul>
-                            </li>
+                            
                             
                             <li><a href="channel.php">Channels</a></li>
                         </ul>
                     </div>
                     <div class="col-lg-6 col-sm-8 col-xs-3">
-                        <form action="search.php" method="post">
+                        <form action="search.php" method="get">
                             <div class="topsearch">
                                 <i class="cv cvicon-cv-cancel topsearch-close"></i>
                                 <div class="input-group">
                                     <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-search"></i></span>
-                                    <input type="text" class="form-control" placeholder="Search" aria-describedby="sizing-addon2">
-                                    <div class="input-group-btn">
-                                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="cv cvicon-cv-video-file"></i>&nbsp;&nbsp;&nbsp;<span class="caret"></span></button>/
-                                        <ul class="dropdown-menu">
-                                            <li><a href="#"><i class="cv cvicon-cv-relevant"></i> Relevant</a></li>
-                                            <li><a href="#"><i class="cv cvicon-cv-calender"></i> Recent</a></li>
-                                            <li><a href="#"><i class="cv cvicon-cv-view-stats"></i> Viewed</a></li>
-                                            <li><a href="#"><i class="cv cvicon-cv-star"></i> Top Rated</a></li>
-                                            <li><a href="#"><i class="cv cvicon-cv-watch-later"></i> Longest</a></li>
-                                        </ul>
-                                    </div><!-- /btn-group -->
+                                    <input type="text" class="form-control" placeholder="Search" name="id" aria-describedby="sizing-addon2">
                                 </div>
                             </div>
                         </form>
@@ -188,27 +158,6 @@
                         <span class="caret"></span>
                     </a>
                     <ul class="mobile-menu-categories">
-                        <li class="color-active">
-                            <a href="#">Pages <span class="caret"></span></a>
-                            <ul>
-                                <li><a href="index.php">Home Page</a></li>
-                                <li><a href="single-video.php">Single Video Page</a></li>
-                                <li><a href="single-video-youtube.php">Single Video Youtube Embedded Page</a></li>
-                                <li><a href="single-video-vimeo.php">Single Video Vimeo Embedded Page</a></li>
-                                <li><a href="upload.php">Upload Video Page</a></li>
-                                <li><a href="upload-edit.php">Upload Video Edit Page</a></li>
-                                <li><a href="search.php">Searched Videos Page</a></li>
-                                <li><a href="channel.php">Single Channel Page</a></li>
-                                <li><a href="channels.php">Channels Page</a></li>
-                                <li><a href="single-video-tabs.php">Single Videos Page With Tabs</a></li>
-                                <li><a href="single-video-playlist.php">Single Videos Page With Playlist</a></li>
-                                <li><a href="history.php">History Page</a></li>
-                          
-                                <li><a href="subscription.php">Subscription Page</a></li>
-                                <li><a href="login.php">Login Page</a></li>
-                                <li><a href="registration.php">Signup Page</a></li>
-                            </ul>
-                        </li>
                 
                         <li><a href="channel.php">Channels</a></li>
                     </ul>
