@@ -130,9 +130,6 @@ if(isset($_SESSION['id_user'])&&($_SESSION['id_user']!=$_GET['id']))
                                     </div>
                                 </div>
                             </div>";}}
-                            else{
-                                echo "<span style='color: white;'> $about</span>";
-                            }
 ?>
                            
                         </div>
