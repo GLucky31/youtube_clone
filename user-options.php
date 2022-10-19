@@ -14,6 +14,7 @@ else{
     $user = $stmt->fetch();
     $username=$user['username'];
     $email=$user['email'];
+    $about=$user['about'];
 }
     
 include "header.php"; ?>
@@ -36,6 +37,10 @@ include "header.php"; ?>
                 <div class="form-group">
                     <label for="profile_picture">Profile picture</label>
                     <input type="file" class="form-control-file" name="profile_picture" id="profile_picture">
+                </div>
+                <div class="form-group">
+                    <label for="about">About</label>
+                    <textarea class="form-control" name="about" id="about"><?php echo $about; ?></textarea>
                 </div>
                 <div class="form-group">
                     <label for="pass1">Password</label>

@@ -18,6 +18,7 @@ $password = $_POST['pass'];
             $_SESSION['id_user'] = $user['id_user'];
             $_SESSION['admin'] = $user['admin'];
             $_SESSION['username']=$user['username'];
+            $_SESSION['about']=$user['about'];
             header("Location: index.php");
             die();
         }

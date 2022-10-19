@@ -57,6 +57,8 @@ if(!isset($_GET['id'])||!isset($_SESSION['id_user'])){
         <input type="hidden" name="id" value="<?php echo $id;?>">
                 <div class="u-area mt-small">
                         <input type="submit" name="submit" class="btn btn-primary u-btn" value="Save">
+                        <!--a tag that leads to single-video.php-->
+                        <a href="single-video.php?id=<?php echo $id;?>" class="btn btn-primary u-btn">Go to video</a>
                     
                 </div>
                 
