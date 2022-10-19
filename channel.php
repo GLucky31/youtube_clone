@@ -34,7 +34,7 @@ $stmt = $pdo->prepare($query);
 $stmt->execute([$_GET['id']]);
 $videos = $stmt->fetchAll();
 $about = $user['about'];
-
+$image=$user['image'];
 if(isset($_SESSION['id_user'])&&($_SESSION['id_user']!=$_GET['id']))
 {
     $query = "SELECT * FROM subscriptions WHERE id_user_from=? AND id_user_to=?";
@@ -51,7 +51,14 @@ if(isset($_SESSION['id_user'])&&($_SESSION['id_user']!=$_GET['id']))
                 <img src="images/channel-banner.png" alt="" class="c-banner">
             </div>
             <div class="c-avatar">
-                <a href="#"><img src="images/channel-user.png" alt=""></a>
+            <?php if(!isset($user['image']))
+            {
+                                echo "<img src='images/avatar.png' alt='avatar' />";
+                            }
+                            else{
+                                $image=$user['image'];
+                                echo "<img src='images/icons/".$image."' alt='avatar' />";
+                            } ?>
             </div>
             
         </div>
