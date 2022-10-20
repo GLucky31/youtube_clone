@@ -35,10 +35,10 @@
 <?php if(isset($_SESSION['id_user']))
 {
     $query ="SELECT * FROM users WHERE id_user =?";
-    $stmt = $conn->prepare($query);
+    $stmt = $pdo->prepare($query);
     $stmt->execute([$_SESSION['id_user']]);
     $user = $stmt->fetch();
-    if(!empty($user['image']))
+    if(isset($user['image']))
     {
     $image = $user['image'];
 }
@@ -80,7 +80,7 @@
                     </div>
                     <div class="col-lg-2 col-sm-4 hidden-xs">
                         <div class="avatar pull-left">
-                            <?php if(!isset($_SESSION['id_user'])){
+                            <?php if(!isset($_SESSION['id_user'])||!isset($image)){
                                 echo "<img src='images/avatar.png' alt='avatar' />";
                             }
                             else{
