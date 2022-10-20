@@ -194,10 +194,7 @@ if(isset($_GET['id']))
 
                                 <div class="cl-header">
                                     <div class="c-nav">
-                                        <ul class="list-inline">
-                                            <li><a href="#" class="active">Popular <span class="hidden-xs">Comments</span></a></li>
-                                            <li><a href="#">Newest <span class="hidden-xs">Comments</span></a></li>
-                                        </ul>
+                            
                                     </div>
                                 </div>
                                 <!-- foreach loop that selects every comment with the video id with pdo and displays it -->
