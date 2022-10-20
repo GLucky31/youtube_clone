@@ -26,17 +26,22 @@ echo "<br>".$_SESSION['admin'];}?>
                                     <div class="row">
                                        
                                                         <?php foreach($videos as $video){   
+                                                            $views=$video['views'];
+                                                            $query= "SELECT * FROM video_likes WHERE id_video = ? and likes = 1";
+    $stmt = $pdo->prepare($query);
+    $stmt->execute([$video['id_video']]);
+    $likecount= $stmt->rowCount();
                                             echo "<div class=' col-lg-3 col-sm-6 videoitem'>
                                                 <div class='b-video'>
                                                     <div class='v-img'>
                                                         <a href='single-video.php?id=".$video['id_video']."'><img src='images/video1-1.png' alt=''></a>
-                                                        <div class='time'>3:50</div>
+                                                        
                                                     </div>
                                                     <div class='v-desc'>
                                                         <a href='single-video.php?id=".$video['id_video']."'>".$video['title']."</a>
                                                     </div>
                                                     <div class='v-views'>
-                                                        27,548 views. <span class='v-percent'><span class='v-circle'></span> 78%</span>
+                                                        ".$views." views. <span class='v-percent'><span class='v-circle'></span> ".$likecount."</span>
                                                     </div>
                                                 </div>
                                             </div>";}
@@ -81,6 +86,11 @@ echo "<br>".$_SESSION['admin'];}?>
                                                         }
                                                         else{
                                                         foreach($videosf as $video){   
+                                                            $views=$video['views'];
+                                                            $query= "SELECT * FROM video_likes WHERE id_video = ? and likes = 1";
+    $stmt = $pdo->prepare($query);
+    $stmt->execute([$video['id_video']]);
+    $likecount= $stmt->rowCount();
                                             echo "<div class=' col-lg-3 col-sm-6 videoitem'>
                                                 <div class='b-video'>
                                                     <div class='v-img'>
@@ -91,7 +101,7 @@ echo "<br>".$_SESSION['admin'];}?>
                                                         <a href='single-video.php?id=".$video['id_video']."'>".$video['title']."</a>
                                                     </div>
                                                     <div class='v-views'>
-                                                        27,548 views. <span class='v-percent'><span class='v-circle'></span> 78%</span>
+                                                        ".$views." views. <span class='v-percent'><span class='v-circle'></span> ".$likecount."</span>
                                                     </div>
                                                 </div>
                                             </div>";}}

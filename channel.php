@@ -33,7 +33,8 @@ $query = 'SELECT * FROM videos WHERE id_user = ?';
 $stmt = $pdo->prepare($query);
 $stmt->execute([$_GET['id']]);
 $videos = $stmt->fetchAll();
-
+$about = $user['about'];
+$image=$user['image'];
 if(isset($_SESSION['id_user'])&&($_SESSION['id_user']!=$_GET['id']))
 {
     $query = "SELECT * FROM subscriptions WHERE id_user_from=? AND id_user_to=?";
@@ -50,7 +51,14 @@ if(isset($_SESSION['id_user'])&&($_SESSION['id_user']!=$_GET['id']))
                 <img src="images/channel-banner.png" alt="" class="c-banner">
             </div>
             <div class="c-avatar">
-                <a href="#"><img src="images/channel-user.png" alt=""></a>
+            <?php if(!isset($user['image']))
+            {
+                                echo "<img src='images/avatar.png' alt='avatar' />";
+                            }
+                            else{
+                                $image=$user['image'];
+                                echo "<img src='images/icons/".$image."' alt='avatar' />";
+                            } ?>
             </div>
             
         </div>
@@ -74,25 +82,11 @@ if(isset($_SESSION['id_user'])&&($_SESSION['id_user']!=$_GET['id']))
                                 </div>
                                 <div class="c-nav">
                                     <ul class="list-inline">
-                                        <li><a href="#">Videos</a></li>
-                                        <li><a href="#">Playlist</a></li>
-                                        <li class="hidden-xs"><a href="#">Channels</a></li>
-                                        <li class="hidden-xs"><a href="#">Discussion</a></li>
-                                        <li class="hidden-xs"><a href="#">About</a></li>
-                                        <li class="hidden-xs"><a href="#">Donate</a></li>
+                                        <li><a href="channel.php?id=<?php echo $_GET['id']?>">Videos</a></li>
+                                        
+                                        <li class="hidden-xs"><a href="channel.php?id=<?php echo $_GET['id']?>&about=1">About</a></li>
                                     </ul>
-                                    <div class="btn-group dropup pull-right">
-                                        <button class="btn btn-default btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            Discussion <span class="caret"></span>
-                                        </button>
-                                        <ul class="dropdown-menu">
-                                            <li><a href="#"><i class="cv cvicon-cv-relevant"></i> Relevant</a></li>
-                                            <li><a href="#"><i class="cv cvicon-cv-calender"></i> Recent</a></li>
-                                            <li><a href="#"><i class="cv cvicon-cv-view-stats"></i> Viewed</a></li>
-                                            <li><a href="#"><i class="cv cvicon-cv-star"></i> Top Rated</a></li>
-                                            <li><a href="#"><i class="cv cvicon-cv-watch-later"></i> Longest</a></li>
-                                        </ul>
-                                    </div>
+                                    
                                 </div>
                                 <div class=" pull-right hidden-xs">
                                     <div class="c-sub-wrap">
@@ -126,61 +120,32 @@ if(isset($_SESSION['id_user'])&&($_SESSION['id_user']!=$_GET['id']))
                 <!-- Featured Videos -->
                 <div class="content-block">
                     <div class="cb-header">
-                        <div class="row">
-                            <div class="col-lg-8 col-xs-6">
-                                <div class="btn-group bg-clean">
-                                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        Uploads <span class="caret"></span>
-                                    </button>
-                                    <ul class="dropdown-menu">
-                                        <li><a href="#"><i class="cv cvicon-cv-relevant"></i> Relevant</a></li>
-                                        <li><a href="#"><i class="cv cvicon-cv-calender"></i> Recent</a></li>
-                                        <li><a href="#"><i class="cv cvicon-cv-view-stats"></i> Viewed</a></li>
-                                        <li><a href="#"><i class="cv cvicon-cv-star"></i> Top Rated</a></li>
-                                        <li><a href="#"><i class="cv cvicon-cv-watch-later"></i> Longest</a></li>
-                                    </ul>
-                                </div>
-                                <div class="clearfix"></div>
-                            </div>
-                            <div class="col-lg-4 col-xs-6">
-                                <div class="h-grid pull-right hidden-xs">
-                                    <a href="#"><i class="cv cvicon-cv-grid-view"></i></a>
-                                    <a href="#"><i class="cv cvicon-cv-list-view"></i></a>
-                                </div>
-                                <div class="btn-group pull-right bg-clean">
-                                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        Date Added ( Newest ) <span class="caret"></span>
-                                    </button>
-                                    <ul class="dropdown-menu">
-                                        <li><a href="#"><i class="cv cvicon-cv-relevant"></i> Relevant</a></li>
-                                        <li><a href="#"><i class="cv cvicon-cv-calender"></i> Recent</a></li>
-                                        <li><a href="#"><i class="cv cvicon-cv-view-stats"></i> Viewed</a></li>
-                                        <li><a href="#"><i class="cv cvicon-cv-star"></i> Top Rated</a></li>
-                                        <li><a href="#"><i class="cv cvicon-cv-watch-later"></i> Longest</a></li>
-                                    </ul>
-                                </div>
-
-                                <div class="clearfix"></div>
-                            </div>
-                        </div>
+                       
                     </div>
                     <div class="cb-content videolist">
                         <div class="row">
-                        <?php foreach($videos as $video){   
+                        <?php 
+                        if(!isset($_GET['about']))
+                        {
+                        foreach($videos as $video){   
+                            $views=$video['views'];
+                                                            $query= "SELECT * FROM video_likes WHERE id_video = ? and likes = 1";
+    $stmt = $pdo->prepare($query);
+    $stmt->execute([$video['id_video']]);
+    $likecount= $stmt->rowCount();
                             echo "<div class=' col-lg-3 col-sm-6 videoitem'>
                                 <div class='b-video'>
                                     <div class='v-img'>
                                         <a href='single-video.php?id=".$video['id_video']."'><img src='images/video1-1.png' alt=''></a>
-                                        <div class='time'>3:50</div>
                                     </div>
                                     <div class='v-desc'>
                                         <a href='single-video.php?id=".$video['id_video']."'>".$video['title']."</a>
                                     </div>
                                     <div class='v-views'>
-                                        27,548 views. <span class='v-percent'><span class='v-circle'></span> 78%</span>
+                                        ".$views." views. <span class='v-percent'><span class='v-circle'></span> ".$likecount."</span>
                                     </div>
                                 </div>
-                            </div>";}
+                            </div>";}}
 ?>
                            
                         </div>

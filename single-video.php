@@ -1,7 +1,21 @@
 <?php
 session_start();
 include "database.php";
-include "header.php"; 
+include "header.php";
+$query="SELECT * FROM videos WHERE id_user=?";
+$stmt = $pdo->prepare($query);
+$stmt->execute([$_SESSION['id_user']]);
+$view = $stmt->fetch();
+$views= $view['views'];
+$views++;
+$query = "UPDATE videos SET views=? WHERE id_video=?";
+$stmt = $pdo->prepare($query);
+$stmt->execute([$views,$_GET['id']]);
+$query = "SELECT * FROM videos WHERE id_video=?";
+$stmt = $pdo->prepare($query);
+$stmt -> execute([$_GET['id']]);
+$view = $stmt->fetch();
+$views = $view['views'];
 if(isset($_GET['id']))
  {
     $id = $_GET['id'];
@@ -90,7 +104,7 @@ if(isset($_GET['id']))
                     </div>
                     <div class="author-border"></div>
                     <div class="sv-views">
-                       
+                       <h3 style="color: white;"><?php echo $views;?> views</h3>
                         <button class="btn <?php if(isset($like)&&$like==1){
                  echo "btn-success";   
                 }?>" onclick="window.location.href='video-rate.php?id=1&vidid=<?php echo $id; ?>'" id="green"><i class="fa fa-thumbs-up fa-lg" aria-hidden="true"></i></button>
@@ -170,6 +184,14 @@ if(isset($_GET['id']))
     
     if(isset($_SESSION['id_user']))
     {
+        $query= "SELECT * FROM comment_likes WHERE id_comment = ? and likes = 1";
+    $stmt = $pdo->prepare($query);
+    $stmt->execute([$comment['id_comment']]);
+    $likecomcount= $stmt->rowCount();
+    $query= "SELECT * FROM comment_likes WHERE id_comment = ? and dislikes = 1";
+    $stmt = $pdo->prepare($query);
+    $stmt->execute([$comment['id_comment']]);
+    $dislikecomcount = $stmt->rowCount();
     $query = "SELECT * FROM comment_likes WHERE id_comment = ? AND id_user = ?";
     $stmt = $pdo->prepare($query);
     $stmt->execute([$comment['id_comment'],$_SESSION['id_user']]);
@@ -192,9 +214,9 @@ if(isset($_GET['id']))
         echo "<div class='cl-comment'>
                                     <div class='cl-avatar'><a href='#'><img src='images/ava8.png' alt=''></a></div>
                                     <div class='cl-comment-text'>
-                                        <div class='cl-name-date'><a href='#'>".$user['username']."</a> . 1 week ago</div>
+                                        <div class='cl-name-date'><a href='#'>".$user['username']."</a> </div>
                                         <div class='cl-text'>".$comment['content']."</div>
-                                        <div class='cl-meta'><span class='green'><span class='circle'></span> 121</span> <span class='grey'><span class='circle'></span> 2</span> . <button id='reply".$comment['id_comment']."'>Reply</button></div>
+                                        <div class='cl-meta'><span class='green'><span class='circle'></span> ".$likecomcount."</span> <span class='grey'><span class='circle'></span> ".$dislikecomcount."</span> . <button id='reply".$comment['id_comment']."'>Reply</button></div>
                                         
                                         <div class='cl-flag'><a href='#'><i class='cv cvicon-cv-flag'></i></a></div>
                                     </div>
@@ -233,6 +255,14 @@ if(isset($_GET['id']))
                                 $replies = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                 foreach($replies as $reply)
                                 {
+                                    $query= "SELECT * FROM comment_likes WHERE id_comment = ? and likes = 1";
+                                    $stmt = $pdo->prepare($query);
+                                    $stmt->execute([$reply['id_comment']]);
+                                    $likereplycount= $stmt->rowCount();
+                                    $query= "SELECT * FROM comment_likes WHERE id_comment = ? and dislikes = 1";
+                                    $stmt = $pdo->prepare($query);
+                                    $stmt->execute([$reply['id_comment']]);
+                                    $dislikereplycount = $stmt->rowCount();
                                     $query = "SELECT * FROM users WHERE id_user=?";
                                     $stmt = $pdo->prepare($query);
                                     $stmt->execute([$reply['id_user']]);
@@ -242,9 +272,9 @@ if(isset($_GET['id']))
                                     <div class='cl-comment-text'>
                                         <div class='cl-name-date'><a href='#'>
                                         ".$user['username']."
-                                         </a> . 6 days ago</div>
+                                         </a> </div>
                                         <div class='cl-text'>".$reply['content']."</div>
-                                        <div class='cl-meta'><span class='green'><span class='circle'></span> 70</span> <span class='grey'><span class='circle'></span> 9</span> . <button id='reply".$reply['id_comment']."'>Reply</button></div>
+                                        <div class='cl-meta'><span class='green'><span class='circle'></span>".$likereplycount."</span> <span class='grey'><span class='circle'></span> ".$dislikereplycount."</span> . <button id='reply".$reply['id_comment']."'>Reply</button></div>
                                     </div>
                                     <div class='clearfix'></div>
                                 </div>";
@@ -324,278 +354,50 @@ if(isset($_GET['id']))
             <div class="col-lg-4 col-xs-12 col-sm-12 hidden-xs">
 
                 <!-- up next -->
-                <div class="caption">
-                    <div class="left">
-                        <a href="#">Up Next</a>
-                    </div>
-                    <div class="right">
-                        <a href="#">Autoplay <i class="cv cvicon-cv-btn-off"></i></a>
-                    </div>
-                    <div class="clearfix"></div>
-                </div>
-                <div class="list">
-                    <div class="h-video row">
-                        <div class="col-lg-6 col-sm-6">
-                            <div class="v-img">
-                                <a href="single-video-tabs.html"><img src="images/sv-1.png" alt=""></a>
-                                <div class="time">15:19</div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 col-sm-6">
-                            <div class="v-desc">
-                                <a href="single-video-tabs.html">Battlefield 3: Official Fault Line Gameplay</a>
-                            </div>
-                            <div class="v-views">
-                                2,729,347 views
-                            </div>
-                            <div class="v-percent"><span class="v-circle"></span> 55%</div>
-                        </div>
-                        <div class="clearfix"></div>
-                    </div>
-
-                    <div class="h-video row">
-                        <div class="col-lg-6 col-sm-6">
-                            <div class="v-img">
-                                <a href="single-video-tabs.html"><img src="images/sv-2.png" alt=""></a>
-                                <div class="time">4:23</div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 col-sm-6">
-                            <div class="v-desc">
-                                <a href="single-video-tabs.html">Kingdom Come: Deliverance ALPHA</a>
-                            </div>
-                            <div class="v-views">
-                                429,347 views
-                            </div>
-                            <div class="v-percent"><span class="v-circle"></span> 79%</div>
-                        </div>
-                        <div class="clearfix"></div>
-                    </div>
-
-                    <div class="h-video row">
-                        <div class="col-lg-6 col-sm-6">
-                            <div class="v-img">
-                                <a href="single-video-tabs.html"><img src="images/sv-3.png" alt=""></a>
-                                <div class="time">7:18</div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 col-sm-6">
-                            <div class="v-desc">
-                                <a href="single-video-tabs.html">Markiplier Reacts to Mean Comments</a>
-                            </div>
-                            <div class="v-views">
-                                630,347 views
-                            </div>
-                            <div class="v-percent"><span class="v-circle"></span> 83%</div>
-                        </div>
-                        <div class="clearfix"></div>
-                    </div>
                 
-                    <div class="h-video row">
-                        <div class="col-lg-6 col-sm-6">
-                            <div class="v-img">
-                                <a href="single-video-tabs.html"><img src="images/sv-4.png" alt=""></a>
-                                <div class="time">15:19</div>
+                <div class='list'>
+                <?php
+                $query = "SELECT * FROM videos WHERE id_video != ? ORDER BY RAND() LIMIT 8";
+                $stmt = $pdo->prepare($query);
+                $stmt->execute([$id]);
+                $videos = $stmt->fetchAll();
+                foreach($videos as $video)
+                {
+                    $views=$video['views'];
+                    $query= "SELECT * FROM video_likes WHERE id_video = ? and likes = 1";
+                    $stmt = $pdo->prepare($query);
+                    $stmt->execute([$video['id_video']]);
+                    $likecount= $stmt->rowCount();
+                    echo "
+                    <div class='h-video row'>
+                        <div class='col-lg-6 col-sm-6'>
+                            <div class='v-img'>
+                                <a href='single-video-tabs.html'><img src='images/sv-1.png' alt=''></a>
+                                
                             </div>
                         </div>
-                        <div class="col-lg-6 col-sm-6">
-                            <div class="v-desc">
-                                <a href="single-video-tabs.html">Cornfield Chase Outlast II Official Gameplay</a>
+                        <div class='col-lg-6 col-sm-6'>
+                            <div class='v-desc'>
+                                <a href='single-video.php?id=".$video['id_video']."'>".$video['title']."</a>
                             </div>
-                            <div class="v-views">
-                                2,729,347 views
+                            <div class='v-views'>
+                                ".$likecount." views
                             </div>
-                            <div class="v-percent"><span class="v-circle"></span> 55%</div>
+                            <div class='v-percent'><span class='v-circle'></span>".$likecount."</div>
                         </div>
-                        <div class="clearfix"></div>
-                    </div>
-                    <div class="h-video row">
-                        <div class="col-lg-6 col-sm-6">
-                            <div class="v-img">
-                                <a href="single-video-tabs.html"><img src="images/sv-5.png" alt=""></a>
-                                <div class="time">4:23</div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 col-sm-6">
-                            <div class="v-desc">
-                                <a href="single-video-tabs.html">Amazing Facts About Nebulas ...</a>
-                            </div>
-                            <div class="v-views">
-                                429,347 views
-                            </div>
-                            <div class="v-percent"><span class="v-circle"></span> 79%</div>
-                        </div>
-                        <div class="clearfix"></div>
-                    </div>
-                    <div class="h-video row">
-                        <div class="col-lg-6 col-sm-6">
-                            <div class="v-img">
-                                <a href="single-video-tabs.html"><img src="images/sv-6.png" alt=""></a>
-                                <div class="time">7:18</div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 col-sm-6">
-                            <div class="v-desc">
-                                <a href="single-video-tabs.html">3DS Games Of 2016 that blew our mind</a>
-                            </div>
-                            <div class="v-views">
-                                630,347 views
-                            </div>
-                            <div class="v-percent"><span class="v-circle"></span> 83%</div>
-                        </div>
-                        <div class="clearfix"></div>
-                    </div>
-                    <div class="h-video row">
-                        <div class="col-lg-6 col-sm-6">
-                            <div class="v-img">
-                                <a href="single-video-tabs.html"><img src="images/sv-7.png" alt=""></a>
-                                <div class="time">27:18</div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 col-sm-6">
-                            <div class="v-desc">
-                                <a href="single-video-tabs.html">No Man's Sky: 21 Minutes of Gameplay</a>
-                            </div>
-                            <div class="v-views">
-                                10,347 views
-                            </div>
-                            <div class="v-percent"><span class="v-circle"></span> 43%</div>
-                        </div>
-                        <div class="clearfix"></div>
-                    </div>
-                    <div class="h-video row">
-                        <div class="col-lg-6 col-sm-6">
-                            <div class="v-img">
-                                <a href="single-video-tabs.html"><img src="images/sv-8.png" alt=""></a>
-                                <div class="time">5:18</div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 col-sm-6">
-                            <div class="v-desc">
-                                <a href="single-video-tabs.html">There Can Only Be One! Introducing Tanc ...</a>
-                            </div>
-                            <div class="v-views">
-                                453,347 views
-                            </div>
-                            <div class="v-percent"><span class="v-circle"></span> 79%</div>
-                        </div>
-                        <div class="clearfix"></div>
-                    </div>
-                    <div class="h-video row">
-                        <div class="col-lg-6 col-sm-6">
-                            <div class="v-img">
-                                <a href="single-video-tabs.html"><img src="images/sv-9.png" alt=""></a>
-                                <div class="time">34:18</div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 col-sm-6">
-                            <div class="v-desc">
-                                <a href="single-video-tabs.html">Game of Thrones Season 6: Event Promo</a>
-                            </div>
-                            <div class="v-views">
-                                1,347 views
-                            </div>
-                            <div class="v-percent"><span class="v-circle"></span> 93%</div>
-                        </div>
-                        <div class="clearfix"></div>
-                    </div>
-                    <div class="h-video row">
-                        <div class="col-lg-6 col-sm-6">
-                            <div class="v-img">
-                                <a href="single-video-tabs.html"><img src="images/sv-10.png" alt=""></a>
-                                <div class="time">6:18</div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 col-sm-6">
-                            <div class="v-desc">
-                                <a href="single-video-tabs.html">Mirror's Edge Catalyst Beta: PS4 vs Xbox One</a>
-                            </div>
-                            <div class="v-views">
-                                420,347 views
-                            </div>
-                            <div class="v-percent"><span class="v-circle"></span> 73%</div>
-                        </div>
-                        <div class="clearfix"></div>
-                    </div>
-                    <div class="h-video row">
-                        <div class="col-lg-6 col-sm-6">
-                            <div class="v-img">
-                                <a href="single-video-tabs.html"><img src="images/sv-11.png" alt=""></a>
-                                <div class="time">21:18</div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 col-sm-6">
-                            <div class="v-desc">
-                                <a href="single-video-tabs.html">Cornfield Chase Outlast II Official Gameplay</a>
-                            </div>
-                            <div class="v-views">
-                                50,347 views
-                            </div>
-                            <div class="v-percent"><span class="v-circle"></span> 94%</div>
-                        </div>
-                        <div class="clearfix"></div>
-                    </div>
-                    <div class="h-video row">
-                        <div class="col-lg-6 col-sm-6">
-                            <div class="v-img">
-                                <a href="single-video-tabs.html"><img src="images/sv-12.png" alt=""></a>
-                                <div class="time">7:18</div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 col-sm-6">
-                            <div class="v-desc">
-                                <a href="single-video-tabs.html">3DS Games Of 2016 that blew our mind</a>
-                            </div>
-                            <div class="v-views">
-                                630,347 views
-                            </div>
-                            <div class="v-percent"><span class="v-circle"></span> 83%</div>
-                        </div>
-                        <div class="clearfix"></div>
-                    </div>
-                    <div class="h-video row">
-                        <div class="col-lg-6 col-sm-6">
-                            <div class="v-img">
-                                <a href="single-video-tabs.html"><img src="images/sv-13.png" alt=""></a>
-                                <div class="time">23:18</div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 col-sm-6">
-                            <div class="v-desc">
-                                <a href="single-video-tabs.html">Cornfield Chase Outlast II Official Gameplay</a>
-                            </div>
-                            <div class="v-views">
-                                2,630,347 views
-                            </div>
-                            <div class="v-percent"><span class="v-circle"></span> 96%</div>
-                        </div>
-                        <div class="clearfix"></div>
-                    </div>
-                    <div class="h-video row">
-                        <div class="col-lg-6 col-sm-6">
-                            <div class="v-img">
-                                <a href="single-video-tabs.html"><img src="images/sv-14.png" alt=""></a>
-                                <div class="time">15:36</div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 col-sm-6">
-                            <div class="v-desc">
-                                <a href="single-video-tabs.html">No Man's Sky: 21 Minutes of Gameplay</a>
-                            </div>
-                            <div class="v-views">
-                                71,347 views
-                            </div>
-                            <div class="v-percent"><span class="v-circle"></span> 63%</div>
-                        </div>
-                        <div class="clearfix"></div>
-                    </div>
-                </div>
+                        <div class='clearfix'></div>
+                    </div>";
+                
+                }
+                
+
+?>
+</div>
+
                 <!-- END Recomended Videos -->
 
                 <!-- load more -->
-                <div class="loadmore">
-                    <a href="#">Show more videos</a>
-                </div>
+                
             </div>
         </div>
     </div>

@@ -32,7 +32,17 @@
 
 <body class="dark">
 <!-- logo, menu, search, avatar -->
-
+<?php if(isset($_SESSION['id_user']))
+{
+    $query ="SELECT * FROM users WHERE id_user =?";
+    $stmt = $conn->prepare($query);
+    $stmt->execute([$_SESSION['id_user']]);
+    $user = $stmt->fetch();
+    if(!empty($user['image']))
+    {
+    $image = $user['image'];
+}
+}?>
 <div class="container-fluid">
     <div class="row">
         <div class="btn-color-toggle">
@@ -70,7 +80,13 @@
                     </div>
                     <div class="col-lg-2 col-sm-4 hidden-xs">
                         <div class="avatar pull-left">
-                            <img src="images/avatar.png" alt="avatar" />
+                            <?php if(!isset($_SESSION['id_user'])){
+                                echo "<img src='images/avatar.png' alt='avatar' />";
+                            }
+                            else{
+                                echo "<img src='images/icons/".$image."' alt='avatar' />";
+                            } ?>
+                            
                             <span class="status"></span>
                         </div>
                         <div class="selectuser pull-left">
