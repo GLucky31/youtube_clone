@@ -6,7 +6,10 @@ if(isset($_SESSION['id_user']))
     header("Location:index.php");
 }
 include_once './header.php';
-
+if(isset($_GET['error']))
+{
+    echo "<script>alert('Wrong email or password!')</script>";
+}
 ?>
 <div class="dark">
 <div class="container-fluid bg-image">

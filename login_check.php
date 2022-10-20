@@ -21,7 +21,10 @@ $password = $_POST['pass'];
             header("Location: index.php");
             die();
         }
+        else{
+            header('Location: login.php?error=1');
+        }
 }
 else{
-header("Location: login.php");}
+header("Location: login.php?error=1");}
 ?>

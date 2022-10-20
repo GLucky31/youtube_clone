@@ -18,6 +18,10 @@ if(isset($_GET['id']))
     $user = $stmt->fetch();
     $username = $user['username'];
     $video_path = "videos/".$video['video'];
+    $query="SELECT * FROM subscriptions WHERE id_user_to=?";
+    $stmt = $pdo->prepare($query);
+    $stmt->execute([$user_id]);
+    $subcount = $stmt->rowCount();
     if(isset($_SESSION['id_user']))
     {
     $query = "SELECT * FROM video_likes WHERE id_video = ? AND id_user = ?";
@@ -78,8 +82,7 @@ if(isset($_GET['id']))
                                     Subscribe
                                 </div>
                                 <div class="c-s">
-                                    22,548,145
-                                </div>
+<?php echo $subcount;?>                                </div>
                                 <div class="clearfix"></div>
                             </div>
                         </div>
@@ -164,6 +167,7 @@ if(isset($_GET['id']))
     $stmt = $pdo->prepare($query);
     $stmt->execute([$comment['id_user']]);
     $user = $stmt->fetch();
+    
     if(isset($_SESSION['id_user']))
     {
     $query = "SELECT * FROM comment_likes WHERE id_comment = ? AND id_user = ?";
