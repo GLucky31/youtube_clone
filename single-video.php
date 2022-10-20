@@ -401,7 +401,7 @@ if(isset($_GET['id']))
                     <div class='h-video row'>
                         <div class='col-lg-6 col-sm-6'>
                             <div class='v-img'>
-                                <a href='single-video-tabs.html'><img src='images/sv-1.png' alt=''></a>
+                                <a href='single-video.php?id=".$video['id_video']."'><img src='images/sv-1.png' alt=''></a>
                                 
                             </div>
                         </div>
