@@ -56,8 +56,13 @@ if(isset($_GET['id']))
             $dislike=1;
         }
     }
+    $query="SELECT * FROM subscriptions WHERE id_user_to=? AND id_user_from=?";
+    $stmt = $pdo->prepare($query);
+    $stmt->execute([$user_id,$_SESSION['id_user']]);
+    $subflag = $stmt->rowCount();
+    }
  }
- }
+ 
  $query= "SELECT * FROM video_likes WHERE id_video = ? and likes = 1";
     $stmt = $pdo->prepare($query);
     $stmt->execute([$id]);
@@ -103,7 +108,21 @@ if(isset($_GET['id']))
                             <div class="c-sub hidden-xs">
 
                                 <div class="c-f">
-                                    Subscribe
+                                    <?php
+                                    if($_SESSION['id_user']==$user_id)
+                                    {
+                                        echo "<a style='color: white;' href='channel.php?id=".$user_id."'>Me</a>";
+                                    }
+                                     else if($subflag==0||!isset($_SESSION['id_user']))
+                                    {
+                                        echo "<a style='color: white;' href='subscribe.php?id=".$user_id."&vid=".$_GET['id']."'>Subscribe</a>";
+                                    }
+                                    
+                                    else
+                                    {
+                                        echo "<a style='color: white;' href='unsubscribe.php?id=".$user_id."&vid=".$_GET['id']."'>Unsubscribe</a>";
+                                    }
+                                    ?>
                                 </div>
                                 <div class="c-s">
 <?php echo $subcount;?>                                </div>
@@ -149,7 +168,7 @@ if(isset($_GET['id']))
                             </a>
                             <a href="#" data-toggle=".comments">
                                 <i class="cv cvicon-cv-comment"></i>
-                                <span>236 Comments</span>
+                                
                             </a>
                         </div>
                        
@@ -158,7 +177,7 @@ if(isset($_GET['id']))
                         <!-- comments -->
                         <div class="comments">
                             <div class="reply-comment">
-                                <div class="rc-header"><i class="cv cvicon-cv-comment"></i> <span class="semibold">236</span> Comments</div>
+                                <div class="rc-header"><i class="cv cvicon-cv-comment"></i> <span class="semibold"></span> </div>
                                 <div class="rc-ava"><a href="#"><img src="images/ava5.png" alt=""></a></div>
                                 <div class="rc-comment">
                                     <form action="comment-upload.php" method="post">
