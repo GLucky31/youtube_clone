@@ -18,6 +18,7 @@ $view = $stmt->fetch();
 $views = $view['views'];
 if(isset($_GET['id']))
  {
+
     $id = $_GET['id'];
     $query = "SELECT * FROM videos WHERE id_video = ?";
     $stmt = $pdo->prepare($query);
@@ -36,6 +37,7 @@ if(isset($_GET['id']))
     $stmt = $pdo->prepare($query);
     $stmt->execute([$user_id]);
     $subcount = $stmt->rowCount();
+    $image=$user['image'];
     if(isset($_SESSION['id_user']))
     {
     $query = "SELECT * FROM video_likes WHERE id_video = ? AND id_user = ?";
@@ -86,9 +88,17 @@ if(isset($_GET['id']))
                 </div>
                 <div class="author">
                     <div class="author-head">
-                        <a href="#"><img src="images/channel-user.png" alt="" class="sv-avatar"></a>
+                    <a href="channel.php?id=<?php echo $user_id; ?>">
+                        <?php if(!isset($user['image']))
+            {
+                                echo "<img src='images/avatar.png' alt='avatar' class='sv-avatar' />";
+                            }
+                            else{
+                                $image=$user['image'];
+                                echo "<img src='images/icons/".$image."' alt='avatar'  class='sv-avatar' />";
+                            } ?></a>
                         <div class="sv-name">
-                            <div><a href="channel.php?id=<?php echo $user_id; ?>"><?php echo $username ?></a> . 52 Videos</div>
+                            <div><a href="channel.php?id=<?php echo $user_id; ?>"><?php echo $username ?></a></div>
              
                             <div class="c-sub hidden-xs">
 
